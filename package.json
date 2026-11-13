@@ -1,0 +1,14 @@
+{
+  "name": "nikahkuy-landing",
+  "version": "1.0.0",
+  "description": "NikahKuy - Online Invitation Landing Page (from Stitch)",
+  "scripts": {
+    "dev": "npx serve public -p 3000 --cors",
+    "preview:desktop": "open http://localhost:3000/desktop.html",
+    "preview:mobile": "open http://localhost:3000/mobile.html",
+    "start": "npx serve public -p 3000"
+  },
+  "keywords": ["wedding", "invitation", "landing-page"],
+  "author": "Prayogatama619@gmail.com",
+  "license": "PRIVATE"
+}
