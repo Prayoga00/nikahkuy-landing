@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NikahKuy - Pilih Tampilan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #fcf9f5;
+      color: #1c1c1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #063025;
+      text-align: center;
+    }
+    .subtitle {
+      color: #414845;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .cards {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: white;
+      border: 1px solid #c1c8c3;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      width: 240px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(6,48,37,0.06);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(6,48,37,0.12);
+      border-color: #755a24;
+    }
+    .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #063025;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: #717975;
+    }
+    .badge {
+      display: inline-block;
+      background: #ffdb99;
+      color: #795f28;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      margin-top: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>✦ NikahKuy</h1>
+    <p class="subtitle">Pilih tampilan yang ingin dilihat</p>
+  </div>
+  <div class="cards">
+    <a class="card" href="desktop.html">
+      <div class="card-icon">🖥️</div>
+      <h2>Desktop</h2>
+      <p>Tampilan website undangan untuk layar penuh (1280px)</p>
+      <span class="badge">Versi Elegan & Lengkap</span>
+    </a>
+    <a class="card" href="mobile.html">
+      <div class="card-icon">📱</div>
+      <h2>Mobile</h2>
+      <p>Tampilan undangan untuk smartphone (390px)</p>
+      <span class="badge">Refined & Motion</span>
+    </a>
+  </div>
+  <p class="subtitle" style="font-size:0.8rem; color:#c1c8c3">
+    Stitch Project ID: 5429132984681631160
+  </p>
+</body>
+</html>
