@@ -1,107 +1,1311 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NikahKuy - Pilih Tampilan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta content="web_standard" name="shell-type">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #fcf9f5;
-      color: #1c1c1a;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      padding: 2rem;
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main>:first-child {
+        margin-top: 0 !important;
+      }
+
+      main>:last-child {
+        margin-bottom: 0 !important;
+      }
     }
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: #063025;
-      text-align: center;
+
+    
+    @keyframes floatGentle {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
-    .subtitle {
-      color: #414845;
-      text-align: center;
-      font-size: 0.95rem;
+    @keyframes shimmerMove {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
     }
-    .cards {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    @keyframes softPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
     }
-    .card {
-      background: white;
-      border: 1px solid #c1c8c3;
-      border-radius: 1.5rem;
-      padding: 2rem;
-      width: 240px;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s;
-      box-shadow: 0 4px 16px rgba(6,48,37,0.06);
+    .animate-float-gentle {
+      animation: floatGentle 5s ease-in-out infinite;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(6,48,37,0.12);
-      border-color: #755a24;
+    .animate-live-dot {
+      animation: softPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    .card-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
     }
-    .card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
-      color: #063025;
-      margin-bottom: 0.5rem;
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+      transform: translateX(-100%);
+      animation: shimmerMove 3.6s infinite ease-in-out;
     }
-    .card p {
-      font-size: 0.85rem;
-      color: #717975;
+    .gold-accent-line {
+      background: linear-gradient(90deg, transparent, #c8aa6e, transparent);
     }
-    .badge {
-      display: inline-block;
-      background: #ffdb99;
-      color: #795f28;
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 0.2rem 0.6rem;
-      border-radius: 999px;
-      margin-top: 0.75rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+
+    ::-webkit-scrollbar {
+      display: none;
     }
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary-fixed": "#311212", "surface-container": "#f0edea", "on-secondary-fixed-variant": "#5b430e", "primary-fixed-dim": "#a6cfbf", "on-surface": "#1c1c1a", "surface-dim": "#dcdad6", "on-secondary-container": "#795f28", "surface-variant": "#e5e2de", "error-container": "#ffdad6", "primary-container": "#20463a", "on-primary-container": "#8bb3a4", "secondary-fixed-dim": "#e5c281", "secondary": "#755a24", "on-primary-fixed": "#002118", "surface-container-highest": "#e5e2de", "on-secondary": "#ffffff", "tertiary-fixed": "#ffdad8", "on-primary-fixed-variant": "#284e41", "secondary-fixed": "#ffdea4", "on-secondary-fixed": "#261900", "on-error-container": "#93000a", "on-background": "#1c1c1a", "on-tertiary": "#ffffff", "inverse-surface": "#31302e", "tertiary-container": "#5b3534", "primary": "#063025", "on-primary": "#ffffff", "inverse-on-surface": "#f3f0ed", "secondary-container": "#ffdb99", "surface-container-low": "#f6f3ef", "on-tertiary-fixed-variant": "#643c3b", "tertiary-fixed-dim": "#f1b9b7", "error": "#ba1a1a", "background": "#fcf9f5", "on-tertiary-container": "#d39e9c", "surface-container-lowest": "#ffffff", "surface-tint": "#406659", "tertiary": "#42201f", "inverse-primary": "#a6cfbf", "surface-container-high": "#ebe8e4", "outline-variant": "#c1c8c3", "primary-fixed": "#c2ecdb", "surface-bright": "#fcf9f5", "on-surface-variant": "#414845", "outline": "#717975", "on-error": "#ffffff", "surface": "#fcf9f5" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin": "2.5rem", "space-md": "1rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-xs": "0.25rem", "margin-mobile": "1.25rem", "space-xl": "2.5rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg-mobile": ["Playfair Display"], "headline-lg": ["Playfair Display"], "title-lg": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Playfair Display"], "display-lg": ["Playfair Display"], "body-lg": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-md": ["Playfair Display"], "label-sm": ["Plus Jakarta Sans"], "headline-sm": ["Playfair Display"], "title-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "display-lg-mobile": ["38px", { "lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["40px", { "lineHeight": "50px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }], "display-lg": ["56px", { "lineHeight": "68px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-md": ["28px", { "lineHeight": "36px", "fontWeight": "500" }], "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }], "headline-sm": ["22px", { "lineHeight": "30px", "fontWeight": "600" }], "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }] } } } }</script>
 </head>
-<body>
-  <div>
-    <h1>✦ NikahKuy</h1>
-    <p class="subtitle">Pilih tampilan yang ingin dilihat</p>
-  </div>
-  <div class="cards">
-    <a class="card" href="desktop.html">
-      <div class="card-icon">🖥️</div>
-      <h2>Desktop</h2>
-      <p>Tampilan website undangan untuk layar penuh (1280px)</p>
-      <span class="badge">Versi Elegan & Lengkap</span>
-    </a>
-    <a class="card" href="mobile.html">
-      <div class="card-icon">📱</div>
-      <h2>Mobile</h2>
-      <p>Tampilan undangan untuk smartphone (390px)</p>
-      <span class="badge">Refined & Motion</span>
-    </a>
-  </div>
-  <p class="subtitle" style="font-size:0.8rem; color:#c1c8c3">
-    Stitch Project ID: 5429132984681631160
-  </p>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 bg-surface/85 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_1px_12px_rgba(32,70,58,0.06)]">
+    <div class="h-16 sm:h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin flex items-center justify-between gap-2 sm:gap-space-md">
+      <div class="flex items-center gap-space-md"><a class="flex items-center gap-space-sm group" href="#">
+          <div
+            class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm text-headline-sm transition-transform group-hover:scale-105">
+            <span class="material-symbols-outlined text-[22px]">favorite</span>
+          </div>
+          <div class="flex flex-col"><span
+              class="font-headline-sm text-headline-sm tracking-tight text-primary">NikahKuy</span><span
+              class="font-label-sm text-label-sm uppercase tracking-wider text-secondary -mt-1">Invitation Studio</span>
+          </div>
+        </a></div>
+      <nav class="hidden xl:flex items-center gap-2 px-2 py-1 rounded-full bg-surface-container-low/60"
+        data-active-classes="bg-surface-container-high text-primary font-bold rounded-full"><a
+          class="px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all"
+          href="#layanan">Fitur</a><a
+          class="px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all"
+          href="#katalog">Katalog Tema</a><a
+          class="px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all"
+          href="#harga">Harga</a><a
+          class="px-4 py-2 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all"
+          href="#faq">FAQ</a></nav>
+      <div class="flex items-center gap-space-sm"><a
+          class="inline-flex items-center px-5 py-2.5 rounded-full font-label-md text-label-md bg-primary text-on-primary shadow-md hover:bg-primary-container hover:shadow-lg transition-all"
+          href="#harga">Buat Undangan</a>
+        <div
+          class="w-9 h-9 rounded-full bg-surface-container text-primary flex items-center justify-center hover:bg-surface-container-high transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="w-full pt-20 bg-surface">
+    <div class="flex flex-col w-full">
+      <!-- HERO SECTION (#hero) -->
+      <section class="relative overflow-hidden -mt-20 pt-24 pb-14 sm:pt-28 sm:pb-20 lg:pt-36 lg:pb-32 bg-surface" id="hero">
+        <!-- Subtle Ambient Glows -->
+        <div
+          class="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[720px] bg-primary-fixed/30 rounded-full blur-[120px] pointer-events-none -z-10">
+        </div>
+        <div
+          class="absolute -top-24 right-0 w-[420px] h-[420px] bg-secondary-fixed/40 rounded-full blur-[100px] pointer-events-none -z-10">
+        </div>
+        <div
+          class="absolute bottom-0 left-[-100px] w-[500px] h-[500px] bg-tertiary-fixed/30 rounded-full blur-[140px] pointer-events-none -z-10">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+            <!-- Left Column: Copy & Value Proposition -->
+            <div class="lg:col-span-7 flex flex-col items-start gap-space-md">
+              <!-- Trust Badge -->
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-container-low border border-outline-variant/60 shadow-xs">
+                <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                <span class="font-label-md text-label-md text-primary font-semibold tracking-wide">Studio Undangan Digital & RSVP Interaktif</span>
+              </div>
+              <!-- Main Title -->
+              <h1 class="font-display-lg text-3xl sm:text-4xl lg:text-display-lg text-primary tracking-tight leading-[1.2] lg:leading-[1.1]">
+                Buat Undangan Online yang <span class="italic text-secondary">Elegan & Berkesan</span>
+              </h1>
+              <!-- Subheadline -->
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                Undangan pernikahan digital siap sebar dalam 5 menit — lengkap dengan RSVP, amplop digital, navigasi
+                Maps, dan musik romantis.
+              </p>
+              <!-- CTAs -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm pt-2 w-full sm:w-auto">
+                <a class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-primary text-on-primary font-title-md text-title-md shadow-xl hover:bg-primary-container transition-all group"
+                  href="#harga">
+                  <span>Buat Undangan — Gratis</span>
+                  <span
+                    class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                </a>
+                <a class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-full bg-surface-container-lowest text-primary font-title-md text-title-md shadow-md hover:bg-surface-container transition-all"
+                  href="#katalog">
+                  <span class="material-symbols-outlined text-[22px] text-secondary">play_circle</span>
+                  <span>Lihat Demo</span>
+                </a>
+              </div>
+              <!-- Feature Proof Bar (taste-skill anti-slop standard) -->
+              <div class="pt-6 flex flex-wrap items-center gap-6 border-t border-outline-variant/40 w-full">
+                <div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+                  <span>150+ Desain Adat & Modern</span>
+                </div>
+                <div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">link</span>
+                  <span>Subdomain nama-pasangan.id</span>
+                </div>
+                <div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">redeem</span>
+                  <span>0% Biaya Amplop Digital</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION LAYANAN KAMI (#layanan) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface-container-lowest" id="layanan">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Layanan
+              Serba Lengkap</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Solusi Digital Eksklusif untuk
+              Setiap Detik Istimewa</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">
+              Dari undangan interaktif, video reels beresolusi tinggi, filter AR media sosial hingga e-buku tamu resepsi
+              tercatat otomatis.
+            </p>
+          </div>
+          <!-- 4 Service Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+            <!-- Card 1: Undangan Website Interaktif -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-primary text-on-primary flex items-center justify-center mb-6 shadow-md group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[28px]">web</span>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Produk
+                Utama</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1 mb-3">Undangan Website Interaktif</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Animasi transisi ultra smooth, custom subdomain nama-pasangan.nikahkuy.id, 100% responsif di smartphone,
+                tablet maupun laptop.
+              </p>
+              <div
+                class="mt-auto pt-6 flex items-center gap-2 text-primary font-label-md text-label-md font-bold group-hover:translate-x-1 transition-transform">
+                <span>Jelajahi Fitur</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- Card 2: Video Invitation & Reels 9:16 -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-secondary text-on-secondary flex items-center justify-center mb-6 shadow-md group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[28px]">videocam</span>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Format
+                Vertikal HD</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1 mb-3">Video Reels &amp; Story 9:16</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Video cinematic resolusi 1080p full HD yang dirancang proporsional untuk Instagram Reels, WhatsApp
+                status, dan TikTok showcase.
+              </p>
+              <div
+                class="mt-auto pt-6 flex items-center gap-2 text-primary font-label-md text-label-md font-bold group-hover:translate-x-1 transition-transform">
+                <span>Lihat Galeri Video</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- Card 3: Filter Instagram & TikTok Wedding -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-tertiary text-on-tertiary flex items-center justify-center mb-6 shadow-md group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[28px]">filter_vintage</span>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Augmented
+                Reality</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1 mb-3">Custom Filter IG &amp; TikTok</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Filter kamera augmented reality unik berisikan monogram inisial pengantin, tanggal spesial, dan preset
+                tone estetik untuk para tamu.
+              </p>
+              <div
+                class="mt-auto pt-6 flex items-center gap-2 text-primary font-label-md text-label-md font-bold group-hover:translate-x-1 transition-transform">
+                <span>Coba Filter Demo</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+            <!-- Card 4: E-Buku Tamu & Check-in QR Code -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div
+                class="w-14 h-14 rounded-2xl bg-primary-container text-on-primary-container flex items-center justify-center mb-6 shadow-md group-hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined text-[28px]">qr_code_scanner</span>
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Sistem Meja
+                Resepsi</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1 mb-3">E-Buku Tamu &amp; QR Check-In</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Sistem check-in tamu tanpa antre manual. Cukup scan barcode QR tamu di pintu masuk dengan laporan
+                kehadiran langsung ke WhatsApp.
+              </p>
+              <div
+                class="mt-auto pt-6 flex items-center gap-2 text-primary font-label-md text-label-md font-bold group-hover:translate-x-1 transition-transform">
+                <span>Pelajari Alur Kerja</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION KEUNGGULAN UTAMA (#keunggulan) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface relative overflow-hidden" id="keunggulan">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Title with Visual Accent -->
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
+            <div class="flex flex-col max-w-2xl">
+              <span
+                class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Keunggulan
+                Platform</span>
+              <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Mengapa Ribuan Calon Pengantin
+                Memilih NikahKuy?</h2>
+            </div>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+              Kami memadukan kemudahan teknologi tanpa mengorbankan estetika dan kehormatan adat pesta pernikahan
+              nusantara.
+            </p>
+          </div>
+          <!-- 6 Feature Highlight Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            <!-- Feature 1 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div class="w-12 h-12 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">bolt</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Siap Aktif Dalam 5 Menit</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Cukup isi formulir data akad, resepsi, galeri foto, dan rekening amplop. Undangan langsung online
+                seketika tanpa perlu coding atau tunggu seharian.
+              </p>
+            </div>
+            <!-- Feature 2 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div
+                class="w-12 h-12 rounded-xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">all_inclusive</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Kirim Tanpa Batas (Unlimited Quota)</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Tidak ada batasan jumlah tamu! Bebas sebarkan link ke 500, 2.000, hingga 10.000 tamu tanpa tambahan
+                biaya kuota sama sekali.
+              </p>
+            </div>
+            <!-- Feature 3 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div
+                class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">redeem</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Amplop Digital &amp; QRIS 0% Potongan</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Terima hadiah kasih langsung ke rekening bank Anda (BCA, Mandiri, BRI, BNI) atau dompet digital (GoPay,
+                OVO, ShopeePay) tanpa potongan fee sepeser pun.
+              </p>
+            </div>
+            <!-- Feature 4 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">explore</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Integrasi Google Maps &amp; Waze</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Titik koordinat venue presisi. Tamu undangan tinggal menekan 1 tombol untuk membuka panduan arah
+                perjalanan akurat lewat Google Maps atau Waze.
+              </p>
+            </div>
+            <!-- Feature 5 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div
+                class="w-12 h-12 rounded-xl bg-secondary-fixed-dim text-on-secondary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">library_music</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Latar Musik Romantis Bebas Pilih</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Gunakan lagu penuh kenangan berdua! Bebas unggah file audio sendiri atau pilih dari kurasi 500+ lagu
+                romantis wedding hits Indonesia &amp; mancanegara.
+              </p>
+            </div>
+            <!-- Feature 6 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all flex flex-col gap-4">
+              <div
+                class="w-12 h-12 rounded-xl bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center">
+                <span class="material-symbols-outlined text-[26px]">lock</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold">Privasi Tamu &amp; Proteksi Password</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Keamanan acara privat terjamin. Anda dapat menyematkan PIN sandi eksklusif sehingga hanya tamu dengan
+                izin keluarga yang dapat membuka undangan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION KATALOG TEMPLATE / THEME UNDANGAN (#katalog) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface-container-low" id="katalog">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Desain
+              Mahakarya</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Pilihan Desain Tema Undangan
+              Terlengkap</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Temukan tema visual yang merefleksikan kepribadian dan filosofi cinta Anda bersama pasangan.
+            </p>
+            <!-- Category Tabs Interactive Filter -->
+            <div class="flex overflow-x-auto scrollbar-none sm:flex-wrap items-center justify-start sm:justify-center gap-2 mt-6 sm:mt-8 pb-2 sm:pb-0 -mx-4 px-4 sm:mx-0 sm:px-0">
+              <button
+                class="px-5 py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow-md"
+                type="button">
+                Semua Desain (150+)
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md shadow-sm transition-all"
+                type="button">
+                Adat Tradisional (Jawa, Minang, Sunda, Batak)
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md shadow-sm transition-all"
+                type="button">
+                Modern Minimalis
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md shadow-sm transition-all"
+                type="button">
+                Rustic Floral
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md shadow-sm transition-all"
+                type="button">
+                Luxury Gold &amp; Emerald
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-full bg-surface-container-lowest text-on-surface-variant hover:text-primary font-label-md text-label-md shadow-sm transition-all"
+                type="button">
+                Islami / Syar'i
+              </button>
+            </div>
+          </div>
+          <!-- 6 Template Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            <!-- Template 1: Royal Emerald Botanical -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Mockup of a wedding invitation website themed Royal Emerald Botanical with deep green botanical leaves, gold metallic foil ornaments, and serif typography"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuApKewIa1bHIiffzqqO3d7ko3pHWTggFS6j2Q4bFmc_CF1VJ-xmall4bNA5BFetBf7ngv4mJglz1v0Ev28iOlMJBderp9P26Jxa8QJkcfeFLxrE0aXUvWsyLBSL2xSZWYUYO96oICjCWJv3vaKc9Zz0sB02iA-8HH2q0KIt40Tt5zKG4pbhMwKbLjXPO5bHr8pfk-xsEvzdBQ3dTrwzh3pTYISP7Ti2AaqvviSe8_w">
+                <div
+                  class="absolute top-4 left-4 px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold shadow-md">
+                  Terpopuler
+                </div>
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Luxury Theme
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Royal Emerald Botanical</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Kemewahan hijau zamrud dipadukan aksen dedaunan botani tropis dan ukiran emas halus.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Template 2: Jawa Ningrat Gold Batik -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Wedding invitation mockup with Indonesian traditional Javanese royal motifs, gold batik patterns, gunungan wayang accents on rich warm cream background"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3-as2pfH_GLj7dz3GUqE_qTbNzPrMXNDLxdjQUE8SO5IyIWuk_yg6QI9Q5PHXHHE1-go6AAmqcyp1ozkM5ZHYOlSO7pBm-20JoGWZ7GBlc7ux8Iecs77chUSY4XP_O2_Q2eU6gOb52YwQFSajvMnfGP34J0EbLl3J7BGBHzZ8VZYpyyV6t8JNvEHVz37II1vlsITUQjAV23XgcSlfGj8cXBWRCWwBy_4w2bm-4ts">
+                <div
+                  class="absolute top-4 left-4 px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold shadow-md">
+                  Adat Jawa
+                </div>
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Tradisional Elegan
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Jawa Ningrat Gold Batik</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Sentuhan klasik kraton Jawa dengan ornamen gunungan prada emas dan nuansa sakral.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Template 3: Minimalist Ivory Linen -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Clean aesthetic wedding invitation website featuring textured warm ivory paper, delicate editorial typography and minimalist line art borders"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuABy6KAJOp78fFGjNW4yAb6Bg_liWuGNt7FmCpdNlfynMDOjpntBjhbEo0w7J8dnLoZ7wtFC_T1r3pieH11EwXp5Dj48qw_04c6WPtCV-ZruCSWpHqn6m-d4N67YW72nho12pREXMpQmKoMWysQUqdQ-rizmgOxA2Y6zz70iJGKBpgmS3NGS47uugiOgftoDmsxlEBkI8gVB9SYGwo-lCQzJcWl1aZGkDXEuhU9i_w">
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Aesthetic Clean
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Minimalist Ivory Linen</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Desain editorial modern bergaya majalah kontemporer dengan ruang putih yang menawan.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Template 4: Romantic Rose Blush -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Romantic blush pink and pastel peach wedding invitation layout with watercolor floral illustrations and romantic calligraphy accents"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEIuM533itY27xwEfUvK6CIIT33r6pBw7YtG0V-8nVXZeWNOdoW25I-c1Y-YNeY2xm5rqoXDvZdy9x3xSF2_YCrwG4rmhPOX-6yQCmRT7C4ZLDnLoG2rb-Y11Wd03gQVjyEx9qPov_Sh69vmG4BgTk4_484A1ZNt2yTcX0FnUtzEa7dDILYw92zYLVxkWuzQxUZ4szEeHk4sKIJ7FNY1NAaxEDlAsUtk-aOIF7qyI">
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Floral Soft
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Romantic Rose Blush</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Bunga mawar merah muda lembut dalam lukisan cat air memancarkan kehangatan cinta tulus.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Template 5: Modern Dark Noir Glam -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Moody dark noir wedding invitation preview with obsidian black background, shimmering champagne gold stars and elegant serif headings"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB402TQUtyp7d4UNXU2Fl1f-9tfphbq1zjGeLLVwYj57X2agPhR19PtcXvBppnbayIAQf0FPKlBNiAxLz1GbjZaSZqsVpKAIwkle99HLnCW4wy6kfZguuA_2_i2AHdkvPGxT2GWdvdiVbnomGmbH6jiXPsaPoqT5e6e8l58yOCo_z034mMXXpJW2-5dBzjtPQnHgi1ZX9YRLX5x6cqX9T-9JYHNbaefFFqhTop3Hps">
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Exclusive Evening
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Modern Dark Noir Glam</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Palet malam yang intim nan glamor, sangat ideal bagi resepsi dinner romantis di bawah lampu temaram.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Template 6: Sunda Siger White Pearl -->
+            <div
+              class="flex flex-col rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+              <div class="relative h-72 w-full overflow-hidden bg-surface-container">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  data-alt="Traditional Sundanese wedding invitation template design with pearl white lace textures, jasmine flower accents and golden Sunda Siger crown symbol"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYkp9DcQAt3zfxoO1jvjR9-3G3tgTCH8XN9gNImrNLy9TIB6RzvIWChg-6BvKZFhmwr74KKv6zy3kfW9vZsQ5UAXP6BQEO9H76n-gvOfewair5US0qmwltNQR3PV7x45q1Q1xLrx8vTGAYW61038cu7etTdcdzUbMqcM1IEhEK3SWqbJ9NSUYXxhSfrLBo3G7TqozLXe_h6L0QJevGqV1nZ3Y3xgROUhX2XehXGhg">
+                <div
+                  class="absolute top-4 left-4 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-md">
+                  Adat Sunda
+                </div>
+                <div
+                  class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/85 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[18px]">volume_up</span>
+                </div>
+                <div
+                  class="absolute bottom-3 left-4 px-3 py-1 rounded-md bg-inverse-surface/80 text-inverse-on-surface font-label-sm text-label-sm">
+                  Adat Kasundaan
+                </div>
+              </div>
+              <div class="p-6 flex flex-col flex-1">
+                <h3 class="font-headline-sm text-headline-sm text-primary">Sunda Siger White Pearl</h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">
+                  Keanggunan mahkota Siger Sunda berhias ronce melati suci di atas latar mutiara putih gading.
+                </p>
+                <div class="mt-auto grid grid-cols-2 gap-2 pt-2">
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-surface-container text-primary font-label-md text-label-md font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                    <span>Live Demo</span>
+                  </button>
+                  <button
+                    class="py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-md text-label-md font-bold hover:bg-primary-container transition-colors flex items-center justify-center gap-1.5"
+                    type="button">
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    <span>Pilih Desain</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Footer Catalog Callout -->
+          <div
+            class="mt-14 p-6 rounded-2xl bg-surface-container flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[28px] text-secondary">palette</span>
+              <p class="font-title-md text-title-md text-primary font-semibold">
+                Ingin tema custom khusus sesuai konsep desainer dekorasimu?
+              </p>
+            </div>
+            <a class="px-6 py-2.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold shadow hover:bg-primary-container transition-colors shrink-0"
+              href="#faq">
+              Konsultasi Custom Theme
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION CARA BUAT STEP-BY-STEP LENGKAP (#cara-kerja) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface" id="cara-kerja">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Alur
+              Pembuatan Simpel</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Hanya 4 Langkah Mudah, Undanganmu
+              Siap Disebar</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Tanpa instal aplikasi berat dan tanpa ribet. Anda bisa mengedit kapan saja langsung lewat browser
+              smartphone.
+            </p>
+          </div>
+          <!-- 4-Step Timeline Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter relative">
+            <!-- Step 1 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg transition-all flex flex-col relative group">
+              <div class="flex items-center justify-between mb-6">
+                <span
+                  class="font-display-lg text-display-lg text-secondary/30 font-bold group-hover:text-secondary transition-colors">01</span>
+                <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[24px]">dashboard_customize</span>
+                </div>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold mb-2">Pilih Desain &amp; Daftar Akun</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Eksplorasi lebih dari 150+ tema favorit, klik 'Pilih Desain' lalu daftarkan akun instan dengan akun
+                Google Anda.
+              </p>
+            </div>
+            <!-- Step 2 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg transition-all flex flex-col relative group">
+              <div class="flex items-center justify-between mb-6">
+                <span
+                  class="font-display-lg text-display-lg text-secondary/30 font-bold group-hover:text-secondary transition-colors">02</span>
+                <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[24px]">edit_note</span>
+                </div>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold mb-2">Lengkapi Data &amp; Foto</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Isi detail pengantin, tanggal akad, lokasi resepsi, love story romantis, galeri foto pre-wedding, dan
+                nomor rekening penerima angpao.
+              </p>
+            </div>
+            <!-- Step 3 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg transition-all flex flex-col relative group">
+              <div class="flex items-center justify-between mb-6">
+                <span
+                  class="font-display-lg text-display-lg text-secondary/30 font-bold group-hover:text-secondary transition-colors">03</span>
+                <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[24px]">tune</span>
+                </div>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold mb-2">Kustomisasi &amp; Preview</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Pilih lagu background favorit, atur font dan warna aksen, lalu review tampilan langsung di layar preview
+                HP Anda sebelum dipublikasikan.
+              </p>
+            </div>
+            <!-- Step 4 -->
+            <div
+              class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-lg transition-all flex flex-col relative group">
+              <div class="flex items-center justify-between mb-6">
+                <span
+                  class="font-display-lg text-display-lg text-secondary/30 font-bold group-hover:text-secondary transition-colors">04</span>
+                <div
+                  class="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shadow-md">
+                  <span class="material-symbols-outlined text-[24px]">send</span>
+                </div>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-primary font-bold mb-2">Bagikan ke Tamu Undangan</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Generate tautan nama tamu otomatis: <em>"Kepada Yth: Bpk/Ibu..."</em> dan sebar ke kontak WhatsApp
+                secara personal hanya dalam 1 klik.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION PAKET & HARGA (#harga) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface-container-low" id="harga">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+            <div
+              class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold mb-3 shadow-sm">
+              <span class="material-symbols-outlined text-[18px]">verified</span>
+              <span>Promo Bulan Ini - Hemat hingga 40%</span>
+            </div>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Investasi Terjangkau untuk Hari
+              Bahagia Anda</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Tanpa biaya tersembunyi, sekali bayar untuk selamanya. Dilengkapi garansi uang kembali 100%.
+            </p>
+          </div>
+          <!-- 3 Tier Pricing Cards Grid -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-stretch">
+            <!-- Tier 1: Paket Basic (Gratis) -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Uji
+                Coba Fitur</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1">Paket Basic</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">Cocok untuk mencoba seluruh fitur
+                builder NikahKuy secara gratis.</p>
+              <div class="flex items-baseline gap-1 mb-6">
+                <span class="font-display-lg text-display-lg text-primary font-bold">Rp 0</span>
+                <span class="font-body-sm text-body-sm text-on-surface-variant">/ Coba Gratis</span>
+              </div>
+              <a class="w-full py-3 px-6 rounded-full bg-surface-container text-primary font-label-md text-label-md font-bold text-center hover:bg-surface-container-high transition-colors mb-8"
+                href="#">
+                Daftar Gratis Sekarang
+              </a>
+              <div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface">
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>1 Pilihan Desain Standar</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Masa Aktif Website 3 Hari</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Maksimal Kuota 20 Tamu</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Navigasi Google Maps Standar</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-on-surface-variant/50">
+                  <span class="material-symbols-outlined text-[18px]">cancel</span>
+                  <span>Tanpa Custom Musik Sendiri</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-on-surface-variant/50">
+                  <span class="material-symbols-outlined text-[18px]">cancel</span>
+                  <span>Tanpa Amplop Digital &amp; QRIS</span>
+                </div>
+              </div>
+            </div>
+            <!-- Tier 2: Paket Premium (Best Value) -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-primary text-on-primary shadow-2xl relative lg:-mt-4 lg:mb-[-1rem]">
+              <div
+                class="absolute -top-3.5 right-6 px-4 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold shadow-md uppercase tracking-wider">
+                Paling Populer (Best Value)
+              </div>
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed font-bold">Paling
+                Disukai</span>
+              <h3 class="font-headline-sm text-headline-sm text-on-primary mt-1">Paket Premium</h3>
+              <p class="font-body-sm text-body-sm text-on-primary/80 mt-1 mb-6">Pilihan terlengkap dan paling fleksibel
+                untuk resepsi pernikahan Anda.</p>
+              <div class="flex flex-col mb-6">
+                <span class="font-body-sm text-body-sm line-through text-on-primary/50">Rp 199.000</span>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-display-lg text-display-lg text-on-primary font-bold">Rp 99.000</span>
+                  <span class="font-body-sm text-body-sm text-on-primary/80">/ Sekali Bayar</span>
+                </div>
+              </div>
+              <a class="w-full py-3.5 px-6 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold text-center shadow-lg hover:bg-secondary-fixed-dim transition-all mb-8"
+                href="#">
+                Pilih Paket Premium
+              </a>
+              <div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-primary">
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span class="font-semibold">Masa Aktif Website 1 Tahun</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span class="font-semibold">Kirim Tamu Unlimited (Tanpa Batas)</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span>Akses Bebas 150+ Desain Premium</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span>Amplop Digital &amp; QRIS 0% Potongan</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span>Galeri Foto Pre-wedding (15 Foto) &amp; Video</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span>RSVP Tamu, Doa &amp; Ucapan Terintegrasi</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary-fixed text-[18px]">check_circle</span>
+                  <span>Lagu Latar Romantis Bebas Request</span>
+                </div>
+              </div>
+            </div>
+            <!-- Tier 3: Paket Exclusive VIP -->
+            <div
+              class="flex flex-col p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-all">
+              <span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Mewah &amp;
+                Eksklusif</span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1">Paket Exclusive VIP</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 mb-6">Layanan VIP komplit dengan custom
+                domain sendiri dan AR filter medsos.</p>
+              <div class="flex flex-col mb-6">
+                <span class="font-body-sm text-body-sm line-through text-on-surface-variant">Rp 350.000</span>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-display-lg text-display-lg text-primary font-bold">Rp 189.000</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">/ Sekali Bayar</span>
+                </div>
+              </div>
+              <a class="w-full py-3 px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md font-bold text-center hover:bg-primary-container transition-colors mb-8 shadow-md"
+                href="#">
+                Pilih Paket Exclusive VIP
+              </a>
+              <div class="flex flex-col gap-3 font-body-sm text-body-sm text-on-surface">
+                <div class="flex items-center gap-2.5 font-bold text-primary">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+                  <span>Semua Fitur Paket Premium Termasuk</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Custom Domain Pribadi (.com / .id / .my.id)</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>1 Video Reels Undangan Resolusi HD 9:16</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>1 Custom AR Filter Instagram &amp; TikTok</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Sistem E-Buku Tamu &amp; QR Check-in Meja Resepsi</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                  <span>Prioritas Customer Service WhatsApp 24/7</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Money Back Guarantee Banner -->
+          <div
+            class="mt-14 max-w-2xl mx-auto flex items-center justify-center gap-4 text-center p-4 rounded-2xl bg-surface-container">
+            <span class="material-symbols-outlined text-secondary text-[32px] shrink-0">verified_user</span>
+            <p class="font-body-sm text-body-sm text-on-surface-variant text-left">
+              <strong class="text-primary font-bold">Garansi Uang Kembali 100%:</strong> Apabila sistem kami mengalami
+              gangguan teknis yang tidak terselesaikan dalam 24 jam, dana Anda akan kami kembalikan penuh tanpa
+              potongan.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION TESTIMONI & ULASAN PENGANTIN -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Cerita
+              Bahagia</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Kesan Pengantin yang Telah
+              Membuktikan</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Simak bagaimana NikahKuy mempermudah persiapan resepsi mereka dan menuai pujian para tamu.
+            </p>
+          </div>
+          <!-- 3 Testimonial Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <!-- Review 1 -->
+            <div class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-1 text-secondary">
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant italic leading-relaxed">
+                  "Bikin undangan cuma 10 menit beres pas makan siang di kantor! Tamu-tamu pada muji karena pas dibuka
+                  di WA langsung ada nama mereka masing-masing. Fitur RSVP juga ngebantu banget ngitung porsi catering
+                  katering resepsi."
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-6 mt-6 border-t border-outline-variant/30">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+                  <img class="w-full h-full object-cover"
+                    data-alt="Portrait of Indonesian couple Rizky and Nadira in modern ivory kebaya and suit, happily smiling"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS4GH30H73-WYLLjdc31jZDDxwv04-tCgKBmMJrqhV8ZLlX6B2hGXV_2g_2jg99Nqt-x_AImuy427BiJCRELEEr5jeLDB_27lQ9QSWxHNs1J55zOPfLgZSJLoMnysMLj3n-Mv60kKdieGLIMAVX23osrsS8gbhDbs-ufc2XP4lrflxs0ZRJFfF1n4HQV-An8WaQAyPg9PNLSsX-H4tRSevoP_hI62kTyp6OKQ_8Z4">
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-title-md text-title-md font-bold text-primary">Rizky &amp; Nadira</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Menikah di Jakarta • Tema
+                    Emerald</span>
+                </div>
+              </div>
+            </div>
+            <!-- Review 2 -->
+            <div class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-1 text-secondary">
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant italic leading-relaxed">
+                  "Keluarga besarku banyak yang di luar kota bahkan di Malaysia. Berkat amplop QRIS &amp; transfer bank,
+                  mereka yang berhalangan hadir tetap bisa kirim kado dan ucapan doa yang tercatat rapi di dashboard.
+                  Praktis maksimal!"
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-6 mt-6 border-t border-outline-variant/30">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+                  <img class="w-full h-full object-cover"
+                    data-alt="Portrait of happy newlywed couple Bima and Felicia in elegant gold traditional attire"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjCA_-22vt9ZkypLmMyMqeDoqNT9i90joe8CU7jx02AwCqIValeP4_nT-N8C-wn0zoHdDOxFx1yROWqdkd55j7qtGr4Lx5jOSrgVg7B82t6CphBmRuHbeUE_txZqS3eDJKmZjcKBSezgHDPk-8tw6w2uzaqW-2FFv6wyUqpMXfCGoMy7AsEANYaxGrEqjL5RZYiYbxzy65m_qcKVlj_C1nhrxFd2MJvtx2-H-yr90">
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-title-md text-title-md font-bold text-primary">Bima &amp; Felicia</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Menikah di Surabaya • Tema Gold
+                    Batik</span>
+                </div>
+              </div>
+            </div>
+            <!-- Review 3 -->
+            <div class="p-5 sm:p-7 lg:p-8 rounded-3xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+              <div class="flex flex-col gap-4">
+                <div class="flex items-center gap-1 text-secondary">
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-[18px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant italic leading-relaxed">
+                  "Paket VIP beneran worth it. Kami dapet filter Instagram yang seru banget dipake tamu pas photobooth,
+                  plus buku tamu QR scanner di resepsi bikin meja buku tamu bebas antrian panjang. Sangat recommended!"
+                </p>
+              </div>
+              <div class="flex items-center gap-3 pt-6 mt-6 border-t border-outline-variant/30">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-surface-container">
+                  <img class="w-full h-full object-cover"
+                    data-alt="Portrait of Indonesian bride and groom Kevin and Sarah outdoors in botanical garden setting with floral crown"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1FvC5Rla_fFwfqK_E35aPRkLbiAiMvhn7og5v4LndhZok_2Z1S2eD5-UWj6qh67rP1RwMEr3hlz2s2S_l0-Mx3FuE60Ho3g8IbbRXbBzyaBf3EmoRT7OSXnBteQucPaWWfFXGxqT1SfbDvaJdHRwwjSeaxufUt078Zig1vwDHjlsZqsBjodct0ZSOK7dIMHcaf1PrQRAQ07Df0U5ouUFVgWk3yGF8SLWstGB_UOI">
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-title-md text-title-md font-bold text-primary">Kevin &amp; Sarah</span>
+                  <span class="font-body-sm text-body-sm text-on-surface-variant">Menikah di Bandung • Tema Minimalist
+                    Ivory</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION FAQ (TANYA JAWAB LENGKAP) (#faq) -->
+      <section class="py-12 sm:py-16 lg:py-24 bg-surface-container-low" id="faq">
+        <div class="max-w-4xl mx-auto px-margin">
+          <!-- Section Header -->
+          <div class="flex flex-col items-center text-center mb-16">
+            <span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-bold mb-2">Bantuan
+              &amp; Konsultasi</span>
+            <h2 class="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg text-primary tracking-tight">Pertanyaan yang Sering Diajukan
+              (FAQ)</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">
+              Temukan jawaban instan untuk berbagai pertanyaan umum calon pengantin.
+            </p>
+          </div>
+          <!-- FAQ Accordion List -->
+          <div class="flex flex-col gap-4">
+            <!-- Item 1 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden"
+              open="">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Berapa lama proses pembuatan undangan
+                  online di NikahKuy?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Hanya butuh waktu sekitar <strong>5 hingga 10 menit</strong>! Setelah Anda mendaftar, memilih desain
+                tema, dan mengisi formulir data pernikahan, website undangan langsung online otomatis dan langsung siap
+                disebarkan ke para tamu.
+              </p>
+            </details>
+            <!-- Item 2 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Apakah saya bisa mengubah data jika ada
+                  perubahan jadwal atau lokasi mendadak?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                <strong>Bisa sekali dan gratis tanpa batas!</strong> Anda dapat masuk ke dashboard editor NikahKuy kapan
+                saja untuk memperbarui jam akad, titik peta, galeri foto, ataupun detail acara. Tautan link undangan
+                yang sudah tersebar akan otomatis ter-update secara real-time.
+              </p>
+            </details>
+            <!-- Item 3 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Bagaimana cara tamu memberikan uang
+                  amplop digital?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Pada bagian <em>Digital Gift / Amplop</em> di undangan, tamu dapat mengklik tombol "Salin Nomor
+                Rekening" atau langsung melakukan scan kode QRIS menggunakan m-Banking dan e-Wallet apa saja. Seluruh
+                dana 100% langsung masuk ke rekening pribadi pengantin tanpa perantara &amp; tanpa potongan fee.
+              </p>
+            </details>
+            <!-- Item 4 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Apakah bisa memasukkan nama tamu satu per
+                  satu secara otomatis untuk dikirim ke WhatsApp?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Ya, fitur <strong>WhatsApp Guest Generator</strong> kami memungkinkan Anda mengunggah daftar tamu (atau
+                mengetik nama) dan menghasilkan tautan personal khusus seperti
+                <code>nikahkuy.id/dimas-anindya?to=dr.+Raditya</code> lengkap dengan template teks pengantar WhatsApp
+                siap kirim dalam satu sentuhan.
+              </p>
+            </details>
+            <!-- Item 5 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Apakah lagu background bisa menggunakan
+                  file audio sendiri?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Tentu saja! Pada Paket Premium dan VIP, Anda leluasa mengunggah file lagu format MP3 sendiri atau
+                memilih dari ratusan daftar putar musik pernikahan romantis berlisensi yang telah kami sediakan.
+              </p>
+            </details>
+            <!-- Item 6 -->
+            <details
+              class="group rounded-2xl bg-surface-container-lowest p-6 shadow-sm transition-all [&amp;_summary::-webkit-details-marker]:hidden">
+              <summary class="flex items-center justify-between cursor-pointer list-none">
+                <h3 class="font-title-lg text-title-lg text-primary font-bold">Berapa lama masa aktif link undangan
+                  saya?</h3>
+                <span
+                  class="material-symbols-outlined text-primary text-[24px] transition-transform duration-300 group-open:rotate-180">expand_more</span>
+              </summary>
+              <p class="mt-4 font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Untuk Paket Premium dan VIP, website undangan Anda aktif selama <strong>1 tahun penuh (365
+                  hari)</strong> sejak tanggal pembuatan. Arsip galeri foto, pesan ucapan selamat, dan kenangan indah
+                tetap bisa Anda buka dan kenang kembali setiap waktu.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <!-- BANNER CTA AKHIR -->
+      <section class="relative py-12 sm:py-16 lg:py-24 bg-primary text-on-primary overflow-hidden">
+        <!-- Ambient Floral Gold Ornaments Background -->
+        <div class="absolute -top-32 -right-32 w-96 h-96 bg-secondary/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div
+          class="absolute -bottom-32 -left-32 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl pointer-events-none">
+        </div>
+        <div class="max-w-5xl mx-auto px-margin text-center relative z-10">
+          <div
+            class="w-16 h-16 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <span class="material-symbols-outlined text-[32px]">favorite</span>
+          </div>
+          <span
+            class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed font-bold mb-3 block">Waktunya
+            Wujudkan Momen Impian</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-primary tracking-tight max-w-3xl mx-auto leading-tight">
+            Siap Membuat Undangan Pernikahan Elegan Anda Hari Ini?
+          </h2>
+          <p class="font-body-lg text-body-lg text-on-primary/80 max-w-2xl mx-auto mt-4 mb-10">
+            Bergabunglah bersama 48.000+ pasangan lainnya. Nikmati kemudahan membuat undangan digital ramah lingkungan
+            tanpa ribet.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-space-sm">
+            <a class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-secondary-fixed text-on-secondary-fixed font-title-md text-title-md font-bold shadow-xl hover:bg-secondary-fixed-dim transition-all group"
+              href="#harga">
+              <span>Buat Undangan Sekarang - Mulai Gratis</span>
+              <span
+                class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+            </a>
+            <a class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-surface-container-lowest/15 backdrop-blur-md text-on-primary font-title-md text-title-md font-semibold hover:bg-surface-container-lowest/25 transition-all"
+              href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank">
+              <span class="material-symbols-outlined text-[22px] text-secondary-fixed">chat</span>
+              <span>Konsultasi WhatsApp</span>
+            </a>
+          </div>
+          <!-- Trust Indicator Pills Below CTA -->
+          <div
+            class="flex flex-wrap items-center justify-center gap-6 mt-12 text-on-primary/70 font-label-md text-label-md">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-secondary-fixed">lock</span>
+              <span>Transaksi Aman &amp; Terenkripsi</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-secondary-fixed">speed</span>
+              <span>Server Cepat Uptime 99.9%</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-secondary-fixed">support_agent</span>
+              <span>Bantuan Customer Service Setiap Hari</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="w-full bg-surface-container-low pt-space-xl pb-space-lg shadow-[0_-1px_10px_rgba(32,70,58,0.03)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter pb-space-xl">
+        <div class="flex flex-col gap-space-sm">
+          <div class="flex items-center gap-space-sm">
+            <div
+              class="w-9 h-9 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-sm text-headline-sm">
+              <span class="material-symbols-outlined text-[20px]">favorite</span>
+            </div><span class="font-headline-sm text-headline-sm tracking-tight text-primary">NikahKuy</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Solusi undangan digital modern,
+            hemat, praktis &amp; ramah lingkungan untuk momen bahagia Anda. Hadirkan pengalaman berkesan bagi para tamu
+            undangan.</p>
+          <div class="flex items-center gap-space-xs pt-space-xs"><span
+              class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span
+                class="material-symbols-outlined text-[18px]">share</span></span><span
+              class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span
+                class="material-symbols-outlined text-[18px]">photo_camera</span></span><span
+              class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-primary"><span
+                class="material-symbols-outlined text-[18px]">smart_display</span></span></div>
+        </div>
+        <div class="flex flex-col gap-space-sm"><span
+            class="font-title-md text-title-md text-primary font-bold">Navigasi Cepat</span>
+          <div class="flex flex-col gap-2"><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#hero">Beranda</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#layanan">Layanan &amp; Fitur Eksklusif</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#keunggulan">Keunggulan Platform</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#katalog">Katalog Tema &amp; Desain</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#harga">Pilihan Paket &amp; Harga</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#cara-kerja">Panduan Pembuatan</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#faq">Pertanyaan Umum (FAQ)</a></div>
+        </div>
+        <div class="flex flex-col gap-space-sm"><span
+            class="font-title-md text-title-md text-primary font-bold">Kategori Undangan</span>
+          <div class="flex flex-col gap-2"><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#">Undangan Pernikahan (Akad &amp; Resepsi)</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#">Tasyakuran Khitanan</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#">Ulang Tahun &amp; Sweet Seventeen</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#">Perayaan Wisuda</a><a
+              class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors"
+              href="#">Reuni Akbar &amp; Gathering Komunitas</a></div>
+        </div>
+        <div class="flex flex-col gap-space-sm"><span class="font-title-md text-title-md text-primary font-bold">Bantuan
+            &amp; Dukungan 24/7</span>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Tim customer support kami senantiasa siap
+            membantu pembuatan undangan Anda.</p>
+          <div class="flex items-center gap-space-xs bg-surface-container p-space-sm rounded-xl"><span
+              class="material-symbols-outlined text-primary text-[24px]">support_agent</span>
+            <div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">WhatsApp
+                Konsultasi</span><span class="font-title-md text-title-md text-primary font-semibold">+62
+                812-3456-7890</span></div>
+          </div>
+          <div class="flex flex-col gap-1.5 pt-space-xs"><span
+              class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Metode Pembayaran
+              Resmi</span>
+            <div class="flex flex-wrap items-center gap-2"><span
+                class="px-2.5 py-1 rounded-lg bg-surface-container font-label-sm text-label-sm text-primary font-bold shadow-[0_1px_3px_rgba(0,0,0,0.03)]">QRIS</span><span
+                class="px-2.5 py-1 rounded-lg bg-surface-container font-label-sm text-label-sm text-primary font-bold shadow-[0_1px_3px_rgba(0,0,0,0.03)]">BCA</span><span
+                class="px-2.5 py-1 rounded-lg bg-surface-container font-label-sm text-label-sm text-primary font-bold shadow-[0_1px_3px_rgba(0,0,0,0.03)]">MANDIRI</span><span
+                class="px-2.5 py-1 rounded-lg bg-surface-container font-label-sm text-label-sm text-primary font-bold shadow-[0_1px_3px_rgba(0,0,0,0.03)]">GOPAY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="pt-space-md border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm">
+        <p>© 2025 NikahKuy. Hak Cipta Dilindungi Undang-Undang.</p>
+        <div class="flex items-center gap-space-md"><a class="hover:text-primary transition-colors" href="#">Kebijakan
+            Privasi</a><a class="hover:text-primary transition-colors" href="#">Syarat &amp; Ketentuan</a><a
+            class="hover:text-primary transition-colors" href="#">Bantuan Teknis</a></div>
+      </div>
+    </div>
+  </footer>
+
 </body>
+
 </html>
