@@ -1,453 +1,400 @@
 <!DOCTYPE html>
 
-<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<html lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<title>Admin Invitation Editor — NikahKuy</title>
-<style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#f3f0ed", "on-background": "#1c1c1a", "surface-tint": "#406659", "surface-bright": "#fcf9f5", "secondary": "#755a24", "on-primary-container": "#8bb3a4", "surface-container-low": "#f6f3ef", "on-surface": "#1c1c1a", "secondary-container": "#ffdb99", "outline": "#717975", "secondary-fixed": "#ffdea4", "surface-dim": "#dcdad6", "surface-container-lowest": "#ffffff", "surface-container-high": "#ebe8e4", "surface": "#fcf9f5", "error-container": "#ffdad6", "tertiary-fixed-dim": "#f1b9b7", "tertiary-fixed": "#ffdad8", "outline-variant": "#c1c8c3", "on-tertiary-fixed": "#311212", "secondary-fixed-dim": "#e5c281", "on-surface-variant": "#414845", "primary": "#063025", "primary-fixed": "#c2ecdb", "primary-container": "#20463a", "on-primary-fixed-variant": "#284e41", "on-secondary-container": "#795f28", "tertiary-container": "#5b3534", "surface-container": "#f0edea", "primary-fixed-dim": "#a6cfbf", "surface-variant": "#e5e2de", "error": "#ba1a1a", "on-error": "#ffffff", "on-secondary-fixed-variant": "#5b430e", "on-secondary": "#ffffff", "inverse-primary": "#a6cfbf", "surface-container-highest": "#e5e2de", "inverse-surface": "#31302e", "on-secondary-fixed": "#261900", "on-tertiary-container": "#d39e9c", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#643c3b", "on-primary": "#ffffff", "background": "#fcf9f5", "tertiary": "#42201f", "on-tertiary": "#ffffff", "on-primary-fixed": "#002118" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-mobile": "1rem", "margin-mobile": "1.25rem", "space-xl": "2.5rem", "space-md": "1rem", "margin": "2.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg-mobile": ["Playfair Display"], "headline-sm": ["Playfair Display"], "label-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Playfair Display"], "headline-lg-mobile": ["Playfair Display"], "headline-md": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "title-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display-lg": ["Playfair Display"], "title-lg": ["Plus Jakarta Sans"] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-screen w-60 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] hidden md:flex"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary font-headline-sm text-headline-sm">N</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">NikahKuy</span><span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest leading-none mt-1">Admin Suite</span></div></div><div class="px-space-md py-space-sm"><p class="px-space-sm py-space-xs font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Manajemen</p><nav class="mt-space-xs flex flex-col gap-1"><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="dashboard-antrean" href="admin-orders.html"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">space_dashboard</span><span>Dashboard &amp; Antrean</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="verifikasi-pembayaran" href="admin-orders.html"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">verified</span><span>Verifikasi Pembayaran</span></div><span class="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm leading-none">4</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="invitation-editor" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">edit_document</span><span>Invitation Editor</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="katalog-tema" href="index.html#katalog"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">style</span><span>Katalog Tema</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="pengaturan-rekening" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">account_balance</span><span>Pengaturan Rekening</span></div></a></nav></div></div><div class="p-space-md"><div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-sm min-w-0"><div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col truncate"><span class="font-label-md text-label-md text-on-surface truncate">Bagas Pratama</span><span class="font-label-sm text-label-sm text-secondary truncate">Lead Concierge</span></div></div><a href="login.html" class="text-on-surface-variant hover:text-error transition-colors p-1 rounded-lg flex items-center justify-center" title="Logout"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="md:pl-60"><header class="fixed top-0 left-0 md:left-60 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-margin flex items-center justify-between"><div class="flex items-center gap-space-sm text-on-surface-variant font-body-sm text-body-sm min-w-0"><a href="admin-orders.html" class="hover:text-primary transition-colors cursor-pointer whitespace-nowrap">Admin Portal</a><span class="text-outline-variant">/</span><span class="hover:text-primary transition-colors cursor-pointer whitespace-nowrap">Editor Undangan</span><span class="text-outline-variant">/</span><span class="text-primary font-semibold truncate">#NK-8820 (Rian &amp; Clarissa)</span></div><div class="flex items-center gap-space-md shrink-0"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[18px]">search</span><input class="bg-surface-container-lowest text-on-surface pl-9 pr-4 py-2 rounded-lg font-body-sm text-body-sm placeholder:text-outline focus:outline-none shadow-[0_1px_8px_rgba(0,0,0,0.02)] w-48 sm:w-64 transition-all border border-surface-container-high" placeholder="Cari pesanan, klien..." type="search"/></div><div class="flex items-center gap-1"><button class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg" title="Notifikasi" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-secondary"></span></button><button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors rounded-lg" title="Bantuan" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button></div><div class="h-6 w-px bg-outline-variant/60"></div><div class="flex items-center gap-2 pl-1 cursor-pointer"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="font-label-md text-label-md text-on-surface font-semibold hidden md:inline">Bagas P.</span></div></div></header><main class="w-full pt-20 px-4 sm:px-space-margin pb-space-xl bg-surface min-h-screen"><div class="flex flex-col w-full">
-<!-- Top Command & Action Bar -->
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-lg"><div class="flex flex-col gap-1.5 min-w-0 max-w-3xl"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider"><span>Admin Console</span><span class="text-secondary">/</span><span>Manajemen Pesanan</span><span class="text-secondary">/</span><span class="text-primary font-bold">Editor Undangan #NK-8820</span></div><div class="flex flex-wrap items-center gap-3"><h1 class="font-headline-lg text-headline-lg text-primary tracking-tight leading-tight">Editor Undangan Digital</h1><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold shadow-sm shrink-0"><span class="w-2 h-2 rounded-full bg-surface-tint"></span>Draft v1.2</span><span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-medium">Tema: Jawa Ningrat VIP</span></div><p class="font-body-md text-body-md text-on-surface-variant leading-normal mt-0.5">Kustomisasi data calon mempelai, jadwal prosesi sakral, kurasi multimedia, dan konfigurasi slug domain resmi klien.</p></div><div class="flex items-center gap-space-sm shrink-0 self-start lg:self-center"><button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-container text-on-surface font-title-md text-title-md hover:bg-surface-container-high transition-colors shadow-sm border border-outline-variant/40" type="button" onclick="alert('Draf berhasil disimpan secara otomatis!')"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">save</span><span>Simpan Draft</span></button><button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-on-primary font-title-md text-title-md shadow-md hover:bg-primary-container transition-all" id="publish-trigger-btn" type="button"><span class="material-symbols-outlined text-[18px] text-secondary-fixed">rocket_launch</span><span>Publish &amp; Kirim Tautan</span></button></div></div>
-<!-- Workspace Grid: 60% Form Atelier vs 40% Live Preview & Handover Panel -->
-<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
-<!-- LEFT CONFIGURATION COLUMN (7 Cols ~ 58-60%) -->
-<div class="xl:col-span-7 flex flex-col gap-space-lg"><!-- Stage Navigation Tabs -->
-<nav class="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-surface-container rounded-xl shadow-inner border border-surface-container-high">
-<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-title-md text-title-md font-semibold transition-all" type="button">
-<span class="material-symbols-outlined text-[18px] text-secondary">favorite</span>
-<span class="truncate">1. Data Mempelai</span>
+<title>Admin Invitation Builder — Rama &amp; Shinta — NikahKuy</title>
+<style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-secondary-container": "#795f28", "secondary-fixed-dim": "#e5c281", "primary-fixed-dim": "#a6cfbf", "surface-dim": "#dcdad6", "on-secondary": "#ffffff", "secondary-fixed": "#ffdea4", "outline": "#717975", "on-primary-fixed-variant": "#284e41", "surface-tint": "#406659", "on-error-container": "#93000a", "tertiary": "#42201f", "outline-variant": "#c1c8c3", "surface-variant": "#e5e2de", "on-surface-variant": "#414845", "error-container": "#ffdad6", "surface-container-high": "#ebe8e4", "surface": "#fcf9f5", "on-error": "#ffffff", "surface-container-highest": "#e5e2de", "surface-container": "#f0edea", "on-primary-fixed": "#002118", "on-secondary-fixed": "#261900", "tertiary-fixed-dim": "#f1b9b7", "background": "#fcf9f5", "on-background": "#1c1c1a", "surface-bright": "#fcf9f5", "tertiary-container": "#5b3534", "primary-fixed": "#c2ecdb", "surface-container-low": "#f6f3ef", "inverse-surface": "#31302e", "surface-container-lowest": "#ffffff", "on-surface": "#1c1c1a", "on-tertiary-container": "#d39e9c", "inverse-on-surface": "#f3f0ed", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#5b430e", "inverse-primary": "#a6cfbf", "on-tertiary": "#ffffff", "tertiary-fixed": "#ffdad8", "on-tertiary-fixed": "#311212", "on-primary-container": "#8bb3a4", "secondary-container": "#ffdb99", "error": "ba1a1a", "on-tertiary-fixed-variant": "#643c3b", "primary-container": "#20463a", "primary": "#063025", "secondary": "#755a24" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-mobile": "1rem", "margin-mobile": "1.25rem", "space-md": "1rem", "gutter": "1.5rem", "space-xl": "2.5rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "margin": "2.5rem", "space-sm": "0.5rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "headline-lg-mobile": [ "Playfair Display" ], "headline-md": [ "Playfair Display" ], "label-sm": [ "Plus Jakarta Sans" ], "title-lg": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "label-md": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "headline-sm": [ "Playfair Display" ], "display-lg-mobile": [ "Playfair Display" ], "headline-lg": [ "Playfair Display" ], "display-lg": [ "Playfair Display" ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_12px_rgba(6,48,37,0.06)] z-50"><div class="h-16 w-full px-6 flex items-center justify-between gap-4"><div class="flex items-center gap-4"><a class="flex items-center justify-center w-9 h-9 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-on-surface" data-path="admin-dashboard" href="admin-orders.html" title="Kembali ke Dashboard"><span class="material-symbols-outlined text-[20px]">arrow_back</span></a><div class="flex items-center gap-3"><div class="flex flex-col"><div class="flex items-center gap-2"><h1 class="font-title-md text-title-md text-primary tracking-tight font-semibold" id="topTitle">Editor Undangan: Rama &amp; Shinta</h1><span class="inline-flex items-center px-2 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container text-on-secondary-container font-semibold">Draft</span></div><span class="text-body-sm font-body-sm text-on-surface-variant">Pernikahan Tradisional Modern Adat Jawa</span></div></div></div><div class="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low"><span class="material-symbols-outlined text-primary text-[18px]">link</span><span class="font-body-sm text-body-sm text-on-surface">nikahkuy.id/</span><span class="font-body-sm text-body-sm font-semibold text-primary" id="topSlug">rama-shinta</span><span class="inline-flex items-center gap-1 pl-2 text-label-sm font-label-sm text-primary font-bold"><span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>Tersedia</span></div><div class="flex items-center gap-3"><button class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-title-md text-title-md transition-all gap-1.5" type="button" onclick="alert('Draft berhasil disimpan!')"><span class="material-symbols-outlined text-[18px]">save</span><span>Simpan Draft</span></button><button class="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md transition-all shadow-[0_4px_16px_rgba(6,48,37,0.2)] gap-1.5" type="button" id="btnPublishTop"><span class="material-symbols-outlined text-[18px] text-secondary-fixed">send</span><span>Publish &amp; Kirim ke Klien</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-20 bg-surface-container-lowest shadow-[1px_0_12px_rgba(6,48,37,0.04)] z-40 flex flex-col items-center py-4 justify-between hidden md:flex"><nav class="w-full flex flex-col items-center gap-2 px-2"><a aria-current="page" class="flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 bg-primary-container text-on-primary-container" href="#" title="Konten &amp; Mempelai"><span class="material-symbols-outlined text-[22px]">edit_note</span><span class="text-label-sm font-label-sm font-semibold">Konten</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all gap-1" href="#" title="Acara &amp; Lokasi"><span class="material-symbols-outlined text-[22px]">event</span><span class="text-label-sm font-label-sm font-semibold">Acara</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all gap-1" href="#" title="Galeri &amp; Musik"><span class="material-symbols-outlined text-[22px]">photo_library</span><span class="text-label-sm font-label-sm font-semibold">Galeri</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all gap-1" href="#" title="Amplop &amp; RSVP"><span class="material-symbols-outlined text-[22px]">featured_seasonal_and_gifts</span><span class="text-label-sm font-label-sm font-semibold">Amplop</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all gap-1" href="#" title="Desain &amp; Font"><span class="material-symbols-outlined text-[22px]">palette</span><span class="text-label-sm font-label-sm font-semibold">Tema</span></a></nav><div class="flex flex-col items-center gap-2 w-full px-2"><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all gap-1" href="#" title="Pengaturan"><span class="material-symbols-outlined text-[22px]">tune</span><span class="text-label-sm font-label-sm font-semibold">Opsi</span></a></div></aside><div class="md:pl-20"><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full grid grid-cols-12 min-h-[calc(100vh-4rem)]">
+<!-- LEFT PANE: Configuration Form & Stepper (55% desktop width = 7 of 12 cols) -->
+<div class="col-span-12 xl:col-span-7 flex flex-col p-6 lg:p-8 xl:pr-10 bg-surface">
+<!-- Stepper Navigation -->
+<nav class="w-full pb-4">
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+<!-- Step 1: Completed -->
+<button class="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container hover:bg-surface-container-high transition-all shrink-0 text-left" type="button">
+<span class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary text-label-sm">
+<span class="material-symbols-outlined text-[13px]">check</span>
+</span>
+<span class="font-label-md text-label-md text-on-surface">1. Tema &amp; URL</span>
 </button>
-<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 font-title-md text-title-md transition-all" type="button">
-<span class="material-symbols-outlined text-[18px]">calendar_month</span>
-<span class="truncate">2. Rangkaian Acara</span>
+<div class="w-4 h-0.5 bg-surface-variant shrink-0"></div>
+<!-- Step 2: Active -->
+<button class="group flex items-center gap-2 px-4 py-2 rounded-full bg-primary-container text-on-primary-container shrink-0 text-left shadow-sm" type="button">
+<span class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-sm text-label-sm font-bold">2</span>
+<span class="font-title-md text-title-md text-surface tracking-tight font-semibold">Data Mempelai</span>
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse ml-0.5"></span>
 </button>
-<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 font-title-md text-title-md transition-all" type="button">
-<span class="material-symbols-outlined text-[18px]">photo_library</span>
-<span class="truncate">3. Galeri &amp; Musik</span>
+<div class="w-4 h-0.5 bg-surface-variant shrink-0"></div>
+<!-- Step 3: Inactive -->
+<button class="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant transition-all shrink-0 text-left" type="button">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">3</span>
+<span class="font-label-md text-label-md">Jadwal &amp; Lokasi</span>
 </button>
-<button class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 font-title-md text-title-md transition-all" type="button">
-<span class="material-symbols-outlined text-[18px]">link</span>
-<span class="truncate">4. Tautan &amp; Slug</span>
+<div class="w-4 h-0.5 bg-surface-variant shrink-0"></div>
+<!-- Step 4: Inactive -->
+<button class="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant transition-all shrink-0 text-left" type="button">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">4</span>
+<span class="font-label-md text-label-md">Galeri &amp; Musik</span>
 </button>
+<div class="w-4 h-0.5 bg-surface-variant shrink-0"></div>
+<!-- Step 5: Inactive -->
+<button class="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant transition-all shrink-0 text-left" type="button">
+<span class="w-5 h-5 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm">5</span>
+<span class="font-label-md text-label-md">Amplop &amp; RSVP</span>
+</button>
+</div>
 </nav>
-<!-- SECTION 1: DOMAIN & SLUG IDENTIFIER -->
-<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex flex-wrap items-center justify-between gap-2">
-<div class="flex items-center gap-space-sm min-w-0">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">public</span>
+<!-- Section Header -->
+<div class="flex items-start justify-between mt-4 mb-6">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider block mb-1 font-bold">Tahap 02 — Profil Utama</span>
+<h2 class="font-headline text-2xl lg:text-3xl text-primary tracking-tight font-semibold">Informasi Kedua Mempelai</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Tuliskan identitas nama lengkap, silsilah keluarga, serta potret yang ditampilkan pada undangan digital.</p>
 </div>
-<div class="min-w-0">
-<h2 class="font-headline-sm text-headline-sm text-primary leading-tight truncate">Domain &amp; Tautan Kustom</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Konfigurasi URL publik yang disematkan dalam undangan QR &amp; WA blast.</p>
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">auto_awesome</span>
+<span>Pratinjau Otomatis</span>
 </div>
 </div>
-<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary-fixed-dim/40 text-primary font-label-sm text-label-sm font-semibold shrink-0">
-<span class="material-symbols-outlined text-[16px] text-surface-tint">verified</span>
-      Tersedia &amp; Siap Pakai
-    </span>
-</div>
-<div class="flex flex-col gap-1.5">
-<div class="flex items-center justify-between">
-<label class="font-label-md text-label-md text-on-surface font-semibold">Custom Slug Undangan</label>
-<span class="font-label-sm text-label-sm text-outline">Dapat diubah kapan saja sebelum final</span>
-</div>
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center bg-surface-container-low rounded-lg p-1.5 border border-outline-variant/30 focus-within:bg-surface-container-lowest focus-within:border-primary/40 transition-all gap-1.5">
-<span class="font-title-md text-title-md text-secondary font-semibold pl-3 select-none py-1 sm:py-0">nikahkuy.com/</span>
-<input class="flex-1 bg-transparent py-1.5 px-2 text-on-surface font-title-md text-title-md font-semibold focus:outline-none min-w-0" id="slug-input" type="text" value="rian-clarissa"/>
-<button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary hover:bg-surface-container font-label-md text-label-md flex items-center justify-center gap-1.5 transition-colors border border-outline-variant/40 shrink-0 shadow-sm" type="button" onclick="navigator.clipboard.writeText('https://nikahkuy.com/' + document.getElementById('slug-input').value); alert('Tautan disalin: https://nikahkuy.com/' + document.getElementById('slug-input').value)">
-<span class="material-symbols-outlined text-[16px]">content_copy</span>
-<span>Salin Slug</span>
-</button>
-</div>
-<p class="font-body-sm text-body-sm text-outline">Tautan ini bersifat unik dan akan digunakan sebagai akses portal tamu undangan.</p>
-</div>
-</section>
-<!-- SECTION 2: DATA MEMPELAI LENGKAP -->
-<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">group</span>
+<!-- Main Form Stack -->
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- SUB-CARD 1: Mempelai Pria (The Groom) -->
+<section class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-[#063025]/5">
+<!-- Card Header Indicator -->
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined text-[18px]">man</span>
 </div>
 <div>
-<h2 class="font-headline-sm text-headline-sm text-primary leading-tight">Data Calon Mempelai</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Informasi silsilah keluarga dan akun media sosial kedua mempelai.</p>
+<h3 class="font-headline text-lg text-primary font-semibold">Mempelai Pria</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calon pengantin kakung beserta garis keluarga</p>
 </div>
 </div>
-<span class="px-2.5 py-1 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase tracking-wider font-bold">Step 1 of 4</span>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed-dim/40 text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold">Wajib Diisi</span>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md items-stretch">
-<!-- Mempelai Wanita Card -->
-<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md border border-outline-variant/30 h-full">
-<div class="flex flex-col gap-space-sm">
-<div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+<!-- Photo Upload Dropzone & Thumbnail Preview -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2 pb-5">
+<div class="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low">
+<div class="w-24 h-28 rounded-lg overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" id="groomImgPreview" alt="Groom portrait" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80"/>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-label-sm text-primary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">photo_camera</span>
+                  Foto
+                </div>
+</div>
+<span class="font-label-sm text-label-sm text-primary mt-2 font-semibold">rama-portrait.jpg</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1.4 MB • Siap</span>
+</div>
+<div class="md:col-span-8 flex flex-col justify-center items-center p-5 rounded-xl bg-surface-container-lowest border border-dashed border-outline-variant text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+</div>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Unggah Foto Mempelai Pria</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 mb-3">Format JPG atau PNG (Maksimal 5MB, rasio disarankan 3:4)</p>
 <div class="flex items-center gap-2">
-<div class="w-7 h-7 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined text-[16px]">female</span>
-</div>
-<h3 class="font-title-lg text-title-lg text-primary font-semibold">Mempelai Wanita</h3>
-</div>
-<span class="px-2.5 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-medium">The Bride</span>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Nama Lengkap &amp; Gelar</label>
-<input id="brideNameInput" class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary focus:bg-surface-bright transition-colors" type="text" value="Clarissa Wijaya, S.Farm"/>
-</div>
-<div class="grid grid-cols-2 gap-space-sm">
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Panggilan</label>
-<input id="brideNickInput" class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="Clarissa"/>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Instagram</label>
-<div class="relative flex items-center">
-<span class="absolute left-3 text-outline text-[13px] font-semibold select-none">@</span>
-<input class="w-full bg-surface-container-lowest pl-7 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="clarissawjy"/>
+<label class="cursor-pointer px-4 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5 font-semibold">
+<span class="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+<span>Ganti File</span>
+<input accept="image/*" class="hidden" type="file"/>
+</label>
+<button class="px-3 py-1.5 rounded-lg bg-transparent hover:bg-surface-container-low text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+                  Hapus
+                </button>
 </div>
 </div>
 </div>
+<!-- Form Fields Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="groom-fullname">Nama Lengkap &amp; Gelar</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all font-medium" id="groom-fullname" placeholder="Contoh: Rama Wijaya, S.T." type="text" value="Rama Wijaya, S.T."/>
 </div>
-<div class="flex flex-col gap-1 pt-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Keterangan Orang Tua</label>
-<textarea class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-body-sm text-body-sm border border-outline-variant/40 focus:outline-none focus:border-primary resize-none transition-colors" rows="2">Putri kedua dari Bpk. Hendra Wijaya &amp; Ibu Ratna Dewi</textarea>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Akan ditampilkan pada header pembuka &amp; sampul</span>
 </div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="groom-nickname">Nama Panggilan</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all font-medium" id="groom-nickname" placeholder="Contoh: Rama" type="text" value="Rama"/>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Digunakan pada monogram nama singkat</span>
 </div>
-<!-- Mempelai Pria Card -->
-<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between gap-space-md border border-outline-variant/30 h-full">
-<div class="flex flex-col gap-space-sm">
-<div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
-<div class="flex items-center gap-2">
-<div class="w-7 h-7 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[16px]">male</span>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="groom-parents">Nama Ayah &amp; Ibu Kandung</label>
+<div class="relative">
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="groom-parents" placeholder="Contoh: Bpk. Hendra Wijaya &amp; Ibu Ratna Dewi" type="text" value="Bpk. Hendra Wijaya &amp; Ibu Ratna Dewi"/>
 </div>
-<h3 class="font-title-lg text-title-lg text-primary font-semibold">Mempelai Pria</h3>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Putra pertama dari keluarga besar Bpk. Hendra Wijaya</span>
 </div>
-<span class="px-2.5 py-0.5 rounded-full bg-surface-container font-label-sm text-label-sm text-on-surface-variant font-medium">The Groom</span>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Nama Lengkap &amp; Gelar</label>
-<input id="groomNameInput" class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary focus:bg-surface-bright transition-colors" type="text" value="Rian Pratama, S.T."/>
-</div>
-<div class="grid grid-cols-2 gap-space-sm">
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Panggilan</label>
-<input id="groomNickInput" class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="Rian"/>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Instagram</label>
-<div class="relative flex items-center">
-<span class="absolute left-3 text-outline text-[13px] font-semibold select-none">@</span>
-<input class="w-full bg-surface-container-lowest pl-7 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="rianpratama"/>
-</div>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-1 pt-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Keterangan Orang Tua</label>
-<textarea class="w-full bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-body-sm text-body-sm border border-outline-variant/40 focus:outline-none focus:border-primary resize-none transition-colors" rows="2">Putra pertama dari Bpk. Bambang Irawan &amp; Ibu Siti Aminah</textarea>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="groom-instagram">Akun Media Sosial (Instagram)</label>
+<div class="flex items-center rounded-lg bg-surface-container-low px-3.5 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="font-body-md text-body-md text-on-surface-variant mr-1">@</span>
+<input class="w-full py-2.5 bg-transparent text-on-surface font-body-md text-body-md focus:outline-none" id="groom-instagram" placeholder="ramawijaya" type="text" value="ramawijaya"/>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">open_in_new</span>
 </div>
 </div>
 </div>
 </section>
-<!-- SECTION 3: RANGKAIAN ACARA UTAMA -->
-<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex flex-wrap items-center justify-between gap-2">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">event_available</span>
+<!-- SUB-CARD 2: Mempelai Wanita (The Bride) -->
+<section class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-[#063025]/5">
+<!-- Card Header Indicator -->
+<div class="flex items-center justify-between pb-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[18px]">woman</span>
 </div>
 <div>
-<h2 class="font-headline-sm text-headline-sm text-primary leading-tight">Rangkaian Acara Utama</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Detail penjadwalan akad nikah serta resepsi perayaan.</p>
+<h3 class="font-headline text-lg text-primary font-semibold">Mempelai Wanita</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Calon pengantin putri beserta garis keluarga</p>
 </div>
 </div>
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors border border-outline-variant/40 shadow-sm" type="button" onclick="alert('Dialog tambah sesi acara kustom (e.g. Siraman, Pengajian, Ngunduh Mantu)')">
-<span class="material-symbols-outlined text-[16px]">add_circle</span>
-<span>Tambah Sesi</span>
-</button>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Wajib Diisi</span>
 </div>
-<div class="flex flex-col gap-space-md">
-<!-- Event 1: Akad Nikah -->
-<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-3 border border-outline-variant/30">
-<div class="flex items-center justify-between">
+<!-- Photo Upload Dropzone & Thumbnail Preview -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2 pb-5">
+<div class="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low">
+<div class="w-24 h-28 rounded-lg overflow-hidden relative shadow-sm">
+<img class="w-full h-full object-cover" id="brideImgPreview" alt="Bride portrait" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"/>
+<div class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-label-sm text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[10px]">photo_camera</span>
+                  Foto
+                </div>
+</div>
+<span class="font-label-sm text-label-sm text-primary mt-2 font-semibold">shinta-portrait.jpg</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">1.8 MB • Siap</span>
+</div>
+<div class="md:col-span-8 flex flex-col justify-center items-center p-5 rounded-xl bg-surface-container-lowest border border-dashed border-outline-variant text-center">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+</div>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Unggah Foto Mempelai Wanita</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 mb-3">Format JPG atau PNG (Maksimal 5MB, rasio disarankan 3:4)</p>
 <div class="flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
-<h3 class="font-title-lg text-title-lg text-primary font-semibold">1. Akad Nikah / Pemberkatan</h3>
-</div>
-<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Sesi Sakral</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Hari &amp; Tanggal</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-secondary text-[18px]">calendar_today</span>
-<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="Sabtu, 28 November 2026"/>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Waktu Pelaksanaan</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-secondary text-[18px]">schedule</span>
-<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="08.00 - 10.00 WIB"/>
+<label class="cursor-pointer px-4 py-1.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-1.5 font-semibold">
+<span class="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+<span>Ganti File</span>
+<input accept="image/*" class="hidden" type="file"/>
+</label>
+<button class="px-3 py-1.5 rounded-lg bg-transparent hover:bg-surface-container-low text-on-surface-variant font-label-md text-label-md transition-colors" type="button">
+                  Hapus
+                </button>
 </div>
 </div>
 </div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Tempat &amp; Alamat</label>
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-<input class="flex-1 bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors min-w-0" type="text" value="Masjid Raya Al-Ikhlas, Jakarta Selatan"/>
-<button class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container border border-outline-variant/40 transition-colors font-label-md text-label-md shrink-0 shadow-sm" type="button" onclick="alert('Membuka integrasi Google Maps Picker')">
-<span class="material-symbols-outlined text-[18px] text-surface-tint">pin_drop</span>
-<span>Sematkan Maps</span>
-</button>
+<!-- Form Fields Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="bride-fullname">Nama Lengkap &amp; Gelar</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all font-medium" id="bride-fullname" placeholder="Contoh: Shinta Lestari, S.Farm." type="text" value="Shinta Lestari, S.Farm."/>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Akan dicetak pada sampul depan dan pengantar doa</span>
 </div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="bride-nickname">Nama Panggilan</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all font-medium" id="bride-nickname" placeholder="Contoh: Shinta" type="text" value="Shinta"/>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Digunakan pada monogram nama singkat</span>
 </div>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="bride-parents">Nama Ayah &amp; Ibu Kandung</label>
+<input class="w-full px-3.5 py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="bride-parents" placeholder="Contoh: Bpk. Bambang Irawan &amp; Ibu Siti Aminah" type="text" value="Bpk. Bambang Irawan &amp; Ibu Siti Aminah"/>
+<span class="text-body-sm font-body-sm text-on-surface-variant mt-1 block">Putri kedua dari keluarga besar Bpk. Bambang Irawan</span>
 </div>
-<!-- Event 2: Resepsi Pernikahan -->
-<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-3 border border-outline-variant/30">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
-<h3 class="font-title-lg text-title-lg text-primary font-semibold">2. Resepsi Pernikahan</h3>
-</div>
-<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-primary font-label-sm text-label-sm font-semibold">Perayaan Agung</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Hari &amp; Tanggal</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-secondary text-[18px]">calendar_today</span>
-<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="Sabtu, 28 November 2026"/>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Waktu Pelaksanaan</label>
-<div class="relative flex items-center">
-<span class="material-symbols-outlined absolute left-3 text-secondary text-[18px]">schedule</span>
-<input class="w-full bg-surface-container-lowest pl-10 pr-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors" type="text" value="11.00 - 14.00 WIB"/>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Tempat &amp; Alamat</label>
-<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-<input class="flex-1 bg-surface-container-lowest px-3 py-2 rounded-lg text-on-surface font-title-md text-title-md border border-outline-variant/40 focus:outline-none focus:border-primary transition-colors min-w-0" type="text" value="The Glass House Ballroom, Senayan, Jakarta Pusat"/>
-<button class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-lowest text-primary hover:bg-surface-container border border-outline-variant/40 transition-colors font-label-md text-label-md shrink-0 shadow-sm" type="button" onclick="alert('Membuka integrasi Google Maps Picker')">
-<span class="material-symbols-outlined text-[18px] text-surface-tint">pin_drop</span>
-<span>Sematkan Maps</span>
-</button>
-</div>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface mb-1.5 font-semibold" for="bride-instagram">Akun Media Sosial (Instagram)</label>
+<div class="flex items-center rounded-lg bg-surface-container-low px-3.5 focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="font-body-md text-body-md text-on-surface-variant mr-1">@</span>
+<input class="w-full py-2.5 bg-transparent text-on-surface font-body-md text-body-md focus:outline-none" id="bride-instagram" placeholder="shintalestari" type="text" value="shintalestari"/>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">open_in_new</span>
 </div>
 </div>
 </div>
 </section>
-<!-- SECTION 4: FITUR & MODUL AKTIF -->
-<section class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex flex-col gap-space-md border border-outline-variant/30">
-<div class="flex items-center gap-space-sm">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">toggle_on</span>
-</div>
-<div>
-<h2 class="font-headline-sm text-headline-sm text-primary leading-tight">Fitur &amp; Modul Interaktif</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Aktifkan modul khusus untuk dipasang pada halaman publik undangan.</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-1">
-<!-- Toggle 1: RSVP -->
-<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
-<div class="flex items-center gap-3 min-w-0 pr-2">
-<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">mark_email_read</span>
-</div>
-<div class="min-w-0">
-<span class="font-title-md text-title-md text-on-surface font-semibold block leading-tight truncate">Buku Tamu &amp; RSVP</span>
-<span class="font-body-sm text-body-sm text-outline truncate block">Konfirmasi kehadiran via web</span>
-</div>
-</div>
-<label class="relative inline-flex items-center cursor-pointer shrink-0">
-<input checked="" class="sr-only peer" type="checkbox"/>
-<div class="w-11 h-6 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-</label>
-</div>
-<!-- Toggle 2: Digital Envelope -->
-<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
-<div class="flex items-center gap-3 min-w-0 pr-2">
-<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-</div>
-<div class="min-w-0">
-<span class="font-title-md text-title-md text-on-surface font-semibold block leading-tight truncate">Amplop Digital &amp; Hadiah</span>
-<span class="font-body-sm text-body-sm text-outline truncate block">Nomor rekening &amp; QRIS statis</span>
-</div>
-</div>
-<label class="relative inline-flex items-center cursor-pointer shrink-0">
-<input checked="" class="sr-only peer" type="checkbox"/>
-<div class="w-11 h-6 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-</label>
-</div>
-<!-- Toggle 3: Love Story -->
-<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
-<div class="flex items-center gap-3 min-w-0 pr-2">
-<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">auto_stories</span>
-</div>
-<div class="min-w-0">
-<span class="font-title-md text-title-md text-on-surface font-semibold block leading-tight truncate">Kisah Cinta (Love Story)</span>
-<span class="font-body-sm text-body-sm text-outline truncate block">Timeline perjalanan asmara</span>
-</div>
-</div>
-<label class="relative inline-flex items-center cursor-pointer shrink-0">
-<input checked="" class="sr-only peer" type="checkbox"/>
-<div class="w-11 h-6 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-</label>
-</div>
-<!-- Toggle 4: Countdown -->
-<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
-<div class="flex items-center gap-3 min-w-0 pr-2">
-<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">hourglass_top</span>
-</div>
-<div class="min-w-0">
-<span class="font-title-md text-title-md text-on-surface font-semibold block leading-tight truncate">Countdown Mundur</span>
-<span class="font-body-sm text-body-sm text-outline truncate block">Penghitung mundur hari-H</span>
-</div>
-</div>
-<label class="relative inline-flex items-center cursor-pointer shrink-0">
-<input checked="" class="sr-only peer" type="checkbox"/>
-<div class="w-11 h-6 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-</label>
-</div>
-</div>
-</section></div>
-<!-- RIGHT PREVIEW & HANDOVER COLUMN (5 Cols ~ 40-42%) -->
-<div class="xl:col-span-5 flex flex-col gap-space-lg sticky top-20">
-<!-- Device Header / Live Mobile Preview Bar -->
-<div class="flex items-center justify-between px-space-md py-3 bg-surface-container-lowest rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)]">
-<div class="flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-surface-tint"></span>
-<span class="font-label-md text-label-md text-primary font-semibold">Live Preview: <span class="text-secondary">Jawa Ningrat VIP</span></span>
-</div>
-<div class="flex items-center gap-1">
-<span class="px-2 py-0.5 rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm">390 x 844 px</span>
-<button class="p-1 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Refresh Mockup" type="button" onclick="alert('Mockup preview diperbarui')">
-<span class="material-symbols-outlined text-[18px]">cached</span>
+<!-- Bottom Navigation Bar inside form pane -->
+<div class="flex items-center justify-between pt-4 pb-12">
+<button class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-title-md text-title-md transition-all gap-2 font-semibold" type="button" onclick="alert('Kembali ke Step 1: Tema & URL')">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+<span>Sebelumnya (Tema &amp; URL)</span>
 </button>
-<a href="index.html" target="_blank" class="p-1 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors" title="Buka Tab Baru">
+<button class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-title-md text-title-md transition-all shadow-[0_4px_20px_rgba(6,48,37,0.25)] gap-2 font-semibold" type="button" onclick="alert('Data profil kedua mempelai berhasil disimpan! Lanjut ke Step 3: Jadwal & Lokasi.')">
+<span>Simpan &amp; Lanjut ke Jadwal</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- RIGHT PANE: Sticky Interactive Live Preview Canvas (45% desktop width = 5 of 12 cols) -->
+<div class="col-span-12 xl:col-span-5 bg-surface-container-low p-6 lg:p-8 flex flex-col items-center xl:sticky xl:top-16 xl:h-[calc(100vh-4rem)] overflow-y-auto">
+<!-- Preview Controls Header Bar -->
+<div class="w-full max-w-[400px] flex items-center justify-between mb-4 px-1">
+<!-- Viewport Switcher Pill -->
+<div class="inline-flex items-center p-1 rounded-full bg-surface-container-lowest shadow-sm">
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all font-semibold" type="button">
+<span class="material-symbols-outlined text-[16px]">smartphone</span>
+<span>Mobile</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all font-semibold" type="button">
+<span class="material-symbols-outlined text-[16px]">laptop</span>
+<span>Desktop</span>
+</button>
+</div>
+<!-- Action Utility Icons -->
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-surface-container-lowest hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shadow-sm" title="Muat Ulang Pratinjau" type="button" onclick="alert('Pratinjau telah diperbarui.')">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+</button>
+<a class="w-8 h-8 rounded-full bg-surface-container-lowest hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shadow-sm" href="index.html" target="_blank" title="Buka di Tab Baru">
 <span class="material-symbols-outlined text-[18px]">open_in_new</span>
 </a>
 </div>
 </div>
-<!-- Realistic Smartphone Mockup -->
-<div class="flex justify-center w-full">
-<!-- Phone Chassis Outer Frame -->
-<div class="w-[360px] sm:w-[380px] bg-primary rounded-[44px] p-3 shadow-[0_24px_64px_-12px_rgba(6,48,37,0.35)] relative">
-<!-- Speaker Earpiece / Dynamic Island Slot -->
-<div class="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-4 bg-primary-container/80 rounded-full z-30 flex items-center justify-center">
-<div class="w-3 h-3 rounded-full bg-primary mr-3"></div>
-<div class="w-8 h-1.5 rounded-full bg-primary/60"></div>
-</div>
-<!-- Phone Inner Screen Display -->
-<div class="w-full bg-[#fdfbf7] rounded-[34px] overflow-hidden relative flex flex-col min-h-[640px] max-h-[660px] select-none">
-<!-- Mobile Wedding Invitation Hero Canvas -->
-<div class="relative h-full flex flex-col justify-between p-6 overflow-y-auto">
-<!-- Subtle Botanical Luxury Watermark Background -->
-<div class="absolute inset-0 bg-gradient-to-b from-[#1b3d32]/90 via-[#0d261e]/70 to-[#061e17]/95 z-10"></div>
-<img class="absolute inset-0 w-full h-full object-cover object-center z-0" alt="Potret editorial mempelai dalam balutan busana adat Jawa ningrat megah" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"/>
-<!-- Royal Gold Filigree Header Details -->
-<div class="relative z-20 flex flex-col items-center text-center pt-8">
-<!-- Ornate Monogram Accent -->
-<div class="w-12 h-12 rounded-full border border-secondary-fixed/40 bg-primary/40 backdrop-blur-md flex items-center justify-center mb-3">
-<span class="font-headline-sm text-headline-sm text-secondary-fixed tracking-widest">R&amp;C</span>
-</div>
-<span class="font-label-sm text-label-sm uppercase tracking-[0.25em] text-secondary-fixed-dim font-bold">Walimatul Ursy</span>
-<h4 id="previewCoupleNames" class="font-headline-lg text-headline-lg text-surface-bright mt-1 tracking-tight leading-tight">
-                  Rian &amp; Clarissa
-                </h4>
-<p class="font-label-md text-label-md text-surface-bright/80 italic mt-1 font-headline-sm">
-                  Sabtu, 28 November 2026
-                </p>
-</div>
-<!-- Midsection: Couple Photo Vignette Frame -->
-<div class="relative z-20 my-4 flex flex-col items-center">
-<div class="relative w-44 h-56 rounded-2xl p-1 bg-gradient-to-b from-secondary-fixed/40 via-secondary-fixed/10 to-transparent shadow-xl">
-<div class="w-full h-full rounded-[14px] overflow-hidden bg-primary-container">
-<img class="w-full h-full object-cover" alt="Romantic couple portrait" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80"/>
-</div>
-<div class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary/90 border border-secondary-fixed/30 backdrop-blur-md text-secondary-fixed font-label-sm text-label-sm whitespace-nowrap shadow-md">
-                    The Wedding Celebration
-                  </div>
+<!-- Smartphone Realistic Mockup Canvas (iPhone 16 styling) -->
+<div class="w-[375px] sm:w-[390px] h-[780px] bg-inverse-surface rounded-[48px] p-3 shadow-[0_24px_60px_-12px_rgba(6,48,37,0.35)] relative shrink-0">
+<!-- Screen Content Container -->
+<div class="w-full h-full rounded-[38px] overflow-hidden bg-primary text-on-primary relative flex flex-col">
+<!-- Realistic Dynamic Island & Status Bar -->
+<div class="absolute top-0 left-0 right-0 h-10 px-6 flex items-center justify-between z-30 pointer-events-none">
+<span class="text-[12px] font-semibold text-white/90">09:41</span>
+<div class="w-24 h-5 bg-black rounded-full mx-auto"></div>
+<div class="flex items-center gap-1.5 text-white/90">
+<span class="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[14px]">wifi</span>
+<span class="material-symbols-outlined text-[14px]">battery_full</span>
 </div>
 </div>
-<!-- Bottom CTA & Countdown Card inside Mobile Screen -->
-<div class="relative z-20 flex flex-col gap-3 pb-2">
-<!-- Segmented Mini Countdown -->
-<div class="p-2.5 rounded-xl bg-surface-container-lowest/15 backdrop-blur-md border border-white/10 flex items-center justify-around text-center">
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-surface-bright leading-none">42</span>
-<span class="font-label-sm text-label-sm text-secondary-fixed uppercase tracking-wider text-[9px]">Hari</span>
+<!-- Scrollable Mobile Invitation Preview Body -->
+<div class="flex-1 overflow-y-auto scrollbar-none pt-12 pb-8 px-5 flex flex-col items-center text-center relative">
+<!-- Subtle Botanical Gold Filigree Ambient Overlay -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary via-primary-container/80 to-primary pointer-events-none"></div>
+<div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-secondary/15 blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-secondary-fixed/10 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 w-full flex flex-col items-center">
+<!-- Monogram Seal -->
+<div class="mt-4 mb-3 w-14 h-14 rounded-full bg-secondary/20 flex items-center justify-center shadow-inner">
+<span class="font-headline text-lg text-secondary-fixed tracking-widest font-serif italic" id="previewMonogram">R&amp;S</span>
 </div>
-<span class="text-secondary-fixed/40">:</span>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-surface-bright leading-none">14</span>
-<span class="font-label-sm text-label-sm text-secondary-fixed uppercase tracking-wider text-[9px]">Jam</span>
+<!-- Ceremony Header Badge -->
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim uppercase tracking-[0.2em] mb-2 font-semibold">
+                Walimatul Ursy
+              </span>
+<!-- Couple Serif Title -->
+<h1 class="font-headline text-2xl sm:text-3xl text-white tracking-tight leading-tight">
+                The Wedding of<br/>
+<span class="text-secondary-fixed font-serif italic" id="previewCoupleNames">Rama &amp; Shinta</span>
+</h1>
+<!-- Date Capsule -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md my-4">
+<span class="material-symbols-outlined text-[15px] text-secondary-fixed">calendar_today</span>
+<span class="font-label-md text-label-md text-white/90 font-medium">Sabtu, 12 Desember 2026</span>
 </div>
-<span class="text-secondary-fixed/40">:</span>
-<div class="flex flex-col">
-<span class="font-headline-sm text-headline-sm text-surface-bright leading-none">38</span>
-<span class="font-label-sm text-label-sm text-secondary-fixed uppercase tracking-wider text-[9px]">Menit</span>
+<!-- Couple Featured Photo in Gold Bevel Card -->
+<div class="w-full aspect-[4/5] rounded-2xl overflow-hidden relative my-2 p-1 bg-gradient-to-b from-secondary-fixed-dim/40 via-white/10 to-transparent shadow-xl">
+<div class="w-full h-full rounded-[14px] overflow-hidden relative">
+<img class="w-full h-full object-cover" alt="Indonesian wedding couple" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-3 right-3 text-left">
+<p class="font-title-md text-title-md text-white font-semibold" id="previewFullNameCard">Rama Wijaya &amp; Shinta Lestari</p>
+<p class="font-body-sm text-body-sm text-secondary-fixed">Yogyakarta &amp; Surakarta</p>
 </div>
 </div>
-<!-- Open Invitation Button -->
-<button class="w-full py-3 rounded-xl bg-secondary-fixed text-on-secondary-fixed font-title-md text-title-md font-bold shadow-lg hover:bg-secondary-fixed-dim transition-all flex items-center justify-center gap-2" type="button">
-<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<!-- Guest Personalization Card -->
+<div class="w-full mt-4 p-4 rounded-xl bg-white/10 backdrop-blur-md text-center border border-white/10">
+<span class="font-label-sm text-label-sm text-white/70 block uppercase tracking-wider mb-1 font-semibold">Kepada Yth. Bapak/Ibu/Saudara/i:</span>
+<p class="font-title-lg text-title-lg text-secondary-fixed font-semibold tracking-tight">Budi Santoso &amp; Partner</p>
+<p class="font-body-sm text-body-sm text-white/80 mt-0.5">Mohon maaf bila ada kesalahan penulisan nama/gelar</p>
+</div>
+<!-- Open Invitation Luxury CTA -->
+<button class="w-full mt-4 py-3 px-5 rounded-xl bg-secondary-fixed text-on-secondary-fixed hover:bg-secondary-fixed-dim transition-all font-title-md text-title-md font-bold shadow-[0_8px_24px_rgba(229,194,129,0.3)] flex items-center justify-center gap-2 group" type="button">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">mail</span>
 <span>Buka Undangan</span>
 </button>
+<!-- Live Countdown Segmented Banner -->
+<div class="w-full mt-5 pt-4">
+<span class="font-label-sm text-label-sm text-secondary-fixed-dim uppercase tracking-wider block mb-2 font-semibold">Menuju Hari Bahagia</span>
+<div class="grid grid-cols-3 gap-2">
+<div class="p-2 rounded-lg bg-white/5 backdrop-blur-sm">
+<span class="font-headline text-xl text-secondary-fixed block leading-none font-bold" id="cntDays">28</span>
+<span class="font-label-sm text-label-sm text-white/70">Hari</span>
 </div>
-<!-- Phone Home Indicator Bar -->
-<div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-surface-bright/40 rounded-full z-30"></div>
+<div class="p-2 rounded-lg bg-white/5 backdrop-blur-sm">
+<span class="font-headline text-xl text-secondary-fixed block leading-none font-bold" id="cntHours">14</span>
+<span class="font-label-sm text-label-sm text-white/70">Jam</span>
+</div>
+<div class="p-2 rounded-lg bg-white/5 backdrop-blur-sm">
+<span class="font-headline text-xl text-secondary-fixed block leading-none font-bold" id="cntMins">45</span>
+<span class="font-label-sm text-label-sm text-white/70">Menit</span>
 </div>
 </div>
 </div>
 </div>
-<!-- Quick Handover Action Box (Bottom Right) -->
-<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-[0_12px_36px_-8px_rgba(32,70,58,0.07)] flex flex-col gap-space-sm"><div class="flex items-center justify-between pb-2 border-b border-outline-variant/30"><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-lg bg-secondary-container flex items-center justify-center text-secondary"><span class="material-symbols-outlined text-[18px]">send</span></div><h3 class="font-title-lg text-title-lg text-primary font-semibold">Serah Terima ke Klien</h3></div><span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">WhatsApp Ready</span></div><div class="flex items-center justify-between bg-surface-container-low px-3 py-2.5 rounded-lg border border-outline-variant/30"><div class="flex flex-col min-w-0"><span class="font-label-sm text-label-sm text-outline">Tautan Aktif Publik</span><span id="handoverLink" class="font-title-md text-title-md text-primary font-semibold truncate">nikahkuy.com/rian-clarissa</span></div><button class="p-2 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/30 shadow-sm shrink-0 ml-2" title="Salin Tautan" type="button" onclick="navigator.clipboard.writeText('https://nikahkuy.com/' + document.getElementById('slug-input').value); alert('Tautan disalin ke clipboard!')"><span class="material-symbols-outlined text-[18px]">content_copy</span></button></div><a id="btnSendWa" href="https://wa.me/6282144332211?text=Halo%20Kak%20Rian%20%26%20Clarissa%2C%20undangan%20pernikahan%20digital%20Anda%20telah%20selesai%20diterbitkan%20oleh%20tim%20NikahKuy%20Atelier.%20Tautan%20resmi%20Anda%3A%20https%3A%2F%2Fnikahkuy.com%2Frian-clarissa" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-lg bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#128C7E] font-title-md text-title-md font-semibold transition-colors flex items-center justify-center gap-2 shadow-sm border border-[#25D366]/30"><span class="material-symbols-outlined text-[20px]">chat</span><span class="truncate">Kirim Tautan Jadi ke WA Klien (0821-4433-2211)</span></a><p class="font-body-sm text-body-sm text-outline text-center leading-relaxed">Pesan otomatis mencakup tautan resmi, barcode QR tamu, dan kredensial akses dasbor RSVP.</p></section>
+</div>
+<!-- Bottom Home Indicator Bar -->
+<div class="w-full h-5 flex justify-center items-center pb-2">
+<div class="w-32 h-1 bg-white/40 rounded-full"></div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div></main></div>
+
 <script>
-  // Simple micro-interaction for custom slug sync into the client copy banner
-  const slugInput = document.getElementById('slug-input');
-  const handoverLink = document.getElementById('handoverLink');
-  const btnSendWa = document.getElementById('btnSendWa');
+  // Live sync script
+  const groomNickInput = document.getElementById('groom-nickname');
+  const brideNickInput = document.getElementById('bride-nickname');
+  const groomFullInput = document.getElementById('groom-fullname');
+  const brideFullInput = document.getElementById('bride-fullname');
 
-  if (slugInput) {
-    slugInput.addEventListener('input', (e) => {
-      const sanitized = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-      e.target.value = sanitized;
-      if (handoverLink) {
-        handoverLink.innerText = 'nikahkuy.com/' + sanitized;
-      }
-      if (btnSendWa) {
-        btnSendWa.href = `https://wa.me/6282144332211?text=${encodeURIComponent('Halo Kak Rian & Clarissa, undangan pernikahan digital Anda telah selesai diterbitkan oleh tim NikahKuy Atelier. Tautan resmi Anda: https://nikahkuy.com/' + sanitized)}`;
-      }
-    });
+  const previewCoupleNames = document.getElementById('previewCoupleNames');
+  const previewMonogram = document.getElementById('previewMonogram');
+  const previewFullNameCard = document.getElementById('previewFullNameCard');
+  const topTitle = document.getElementById('topTitle');
+  const topSlug = document.getElementById('topSlug');
+
+  function updatePreview() {
+    const gNick = groomNickInput ? groomNickInput.value.trim() : 'Rama';
+    const bNick = brideNickInput ? brideNickInput.value.trim() : 'Shinta';
+    const gFull = groomFullInput ? groomFullInput.value.trim() : 'Rama Wijaya, S.T.';
+    const bFull = brideFullInput ? brideFullInput.value.trim() : 'Shinta Lestari, S.Farm.';
+
+    if (previewCoupleNames) {
+      previewCoupleNames.innerText = `${gNick} & ${bNick}`;
+    }
+    if (previewMonogram) {
+      previewMonogram.innerText = `${gNick.charAt(0)}&${bNick.charAt(0)}`;
+    }
+    if (previewFullNameCard) {
+      previewFullNameCard.innerText = `${gFull.split(',')[0]} & ${bFull.split(',')[0]}`;
+    }
+    if (topTitle) {
+      topTitle.innerText = `Editor Undangan: ${gNick} & ${bNick}`;
+    }
+    if (topSlug) {
+      topSlug.innerText = `${gNick.toLowerCase()}-${bNick.toLowerCase()}`.replace(/[^a-z0-9-]/g, '-');
+    }
   }
 
-  // Publish button animation trigger feedback
-  const publishBtn = document.getElementById('publish-trigger-btn');
-  if (publishBtn) {
-    publishBtn.addEventListener('click', () => {
-      const originalText = publishBtn.innerHTML;
-      publishBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Memproses...</span>';
+  if (groomNickInput) groomNickInput.addEventListener('input', updatePreview);
+  if (brideNickInput) brideNickInput.addEventListener('input', updatePreview);
+  if (groomFullInput) groomFullInput.addEventListener('input', updatePreview);
+  if (brideFullInput) brideFullInput.addEventListener('input', updatePreview);
+
+  // Top publish button
+  const btnPublish = document.getElementById('btnPublishTop');
+  if (btnPublish) {
+    btnPublish.addEventListener('click', () => {
+      const orig = btnPublish.innerHTML;
+      btnPublish.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Menerbitkan...</span>';
       setTimeout(() => {
-        publishBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>Berhasil Diterbitkan!</span>';
-        publishBtn.classList.remove('bg-primary');
-        publishBtn.classList.add('bg-surface-tint');
+        btnPublish.innerHTML = '<span class="material-symbols-outlined text-[18px]">done_all</span><span>Telah Diterbitkan!</span>';
+        btnPublish.classList.remove('bg-primary');
+        btnPublish.classList.add('bg-emerald-700');
         setTimeout(() => {
-          publishBtn.innerHTML = originalText;
-          publishBtn.classList.remove('bg-surface-tint');
-          publishBtn.classList.add('bg-primary');
+          btnPublish.innerHTML = orig;
+          btnPublish.classList.remove('bg-emerald-700');
+          btnPublish.classList.add('bg-primary');
         }, 2500);
-      }, 900);
+      }, 800);
     });
   }
-</script></main></div></body></html>
+</script>
+</body></html>

@@ -3,52 +3,44 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function AdminBuilderPage() {
-  // Navigation active tab
-  const [activeTab, setActiveTab] = useState<'mempelai' | 'acara' | 'galeri' | 'slug'>('mempelai');
+export default function AdminInvitationBuilderPage() {
+  // Stepper state
+  const [currentStep, setCurrentStep] = useState<number>(2); // 1: Tema & URL, 2: Data Mempelai, 3: Jadwal, 4: Galeri, 5: Amplop
 
-  // Slug State
-  const [slug, setSlug] = useState('rian-clarissa');
-  const [copiedLink, setCopiedLink] = useState(false);
+  // Sidebar navigation active state
+  const [activeNav, setActiveNav] = useState<'content' | 'event' | 'gallery' | 'gift' | 'theme' | 'settings'>('content');
 
-  // Bride State
-  const [brideName, setBrideName] = useState('Clarissa Wijaya, S.Farm');
-  const [brideNick, setBrideNick] = useState('Clarissa');
-  const [brideIg, setBrideIg] = useState('clarissawjy');
-  const [brideParents, setBrideParents] = useState('Putri kedua dari Bpk. Hendra Wijaya & Ibu Ratna Dewi');
+  // Viewport mode inside preview
+  const [viewportMode, setViewportMode] = useState<'mobile' | 'desktop'>('mobile');
 
-  // Groom State
-  const [groomName, setGroomName] = useState('Rian Pratama, S.T.');
-  const [groomNick, setGroomNick] = useState('Rian');
-  const [groomIg, setGroomIg] = useState('rianpratama');
-  const [groomParents, setGroomParents] = useState('Putra pertama dari Bpk. Bambang Irawan & Ibu Siti Aminah');
+  // Groom Profile State
+  const [groomFullname, setGroomFullname] = useState('Rama Wijaya, S.T.');
+  const [groomNickname, setGroomNickname] = useState('Rama');
+  const [groomParents, setGroomParents] = useState('Bpk. Hendra Wijaya & Ibu Ratna Dewi');
+  const [groomInstagram, setGroomInstagram] = useState('ramawijaya');
+  const [groomPhoto, setGroomPhoto] = useState('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80');
 
-  // Events State
-  const [akadDate, setAkadDate] = useState('Sabtu, 28 November 2026');
-  const [akadTime, setAkadTime] = useState('08.00 - 10.00 WIB');
-  const [akadVenue, setAkadVenue] = useState('Masjid Raya Al-Ikhlas, Jakarta Selatan');
+  // Bride Profile State
+  const [brideFullname, setBrideFullname] = useState('Shinta Lestari, S.Farm.');
+  const [brideNickname, setBrideNickname] = useState('Shinta');
+  const [brideParents, setBrideParents] = useState('Bpk. Bambang Irawan & Ibu Siti Aminah');
+  const [brideInstagram, setBrideInstagram] = useState('shintalestari');
+  const [bridePhoto, setBridePhoto] = useState('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');
 
-  const [resepsiDate, setResepsiDate] = useState('Sabtu, 28 November 2026');
-  const [resepsiTime, setResepsiTime] = useState('11.00 - 14.00 WIB');
-  const [resepsiVenue, setResepsiVenue] = useState('The Glass House Ballroom, Senayan, Jakarta Pusat');
+  // Event & Guest Customization
+  const [guestName, setGuestName] = useState('Budi Santoso & Partner');
+  const [eventDate] = useState('Sabtu, 12 Desember 2026');
 
-  // Interactive Modules Toggles
-  const [rsvpEnabled, setRsvpEnabled] = useState(true);
-  const [envelopeEnabled, setEnvelopeEnabled] = useState(true);
-  const [storyEnabled, setStoryEnabled] = useState(true);
-  const [countdownEnabled, setCountdownEnabled] = useState(true);
+  // Countdown timer inside mobile phone canvas
+  const [countdown, setCountdown] = useState({ days: 28, hours: 14, mins: 45, secs: 10 });
 
-  // Publishing State
+  // Publishing & feedback states
   const [isPublishing, setIsPublishing] = useState(false);
   const [isPublished, setIsPublished] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-
-  // Countdown timer inside mobile phone preview
-  const [timeLeft, setTimeLeft] = useState({ days: 42, hours: 14, mins: 38, secs: 20 });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
+      setCountdown((prev) => {
         if (prev.secs > 0) return { ...prev, secs: prev.secs - 1 };
         if (prev.mins > 0) return { ...prev, mins: 59, secs: 59 };
         if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, mins: 59, secs: 59 };
@@ -58,950 +50,732 @@ export default function AdminBuilderPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const clean = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-    setSlug(clean);
-  };
-
-  const handleCopyLink = () => {
-    if (typeof window !== 'undefined') {
-      navigator.clipboard.writeText(`https://nikahkuy.com/${slug}`);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2000);
-    }
-  };
-
   const handlePublish = () => {
     setIsPublishing(true);
     setTimeout(() => {
       setIsPublishing(false);
       setIsPublished(true);
       setTimeout(() => setIsPublished(false), 3000);
-    }, 900);
+    }, 800);
   };
 
-  const handleSaveDraft = () => {
-    setIsSaving(true);
-    setTimeout(() => {
-      setIsSaving(false);
-      alert('Draf undangan berhasil disimpan!');
-    }, 500);
-  };
-
-  const waMessage = `Halo Kak ${groomNick} & ${brideNick}, undangan pernikahan digital Anda telah selesai diterbitkan oleh tim NikahKuy Atelier. Tautan resmi Anda: https://nikahkuy.com/${slug}`;
+  const currentSlug = `${groomNickname.toLowerCase()}-${brideNickname.toLowerCase()}`.replace(/[^a-z0-9-]/g, '-');
+  const monogram = `${groomNickname.charAt(0)}&${brideNickname.charAt(0)}`;
 
   return (
     <div className="bg-[#fcf9f5] font-body text-[#1c1c1a] antialiased min-h-screen">
-      {/* Left Sidebar Navigation */}
-      <aside className="fixed left-0 top-0 h-screen w-60 bg-[#f6f3ef] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)] hidden md:flex">
-        <div className="flex flex-col">
-          {/* Brand Header */}
-          <div className="h-16 px-6 flex items-center gap-2 border-b border-[#063025]/5">
-            <div className="w-8 h-8 rounded-lg bg-[#20463a] flex items-center justify-center text-white font-headline text-lg font-bold">
-              N
-            </div>
-            <div className="flex flex-col">
-              <span className="font-headline text-lg text-[#063025] tracking-tight leading-none font-bold">
-                NikahKuy
-              </span>
-              <span className="text-[10px] text-[#755a24] uppercase tracking-widest leading-none mt-1 font-semibold">
-                Admin Suite
-              </span>
-            </div>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="px-4 py-3">
-            <p className="px-2 py-1 text-[11px] text-[#414845] uppercase tracking-wider font-bold">Manajemen</p>
-            <nav className="mt-1 flex flex-col gap-1">
-              <Link
-                href="/admin/orders"
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a] transition-colors text-[13px]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-[18px]">space_dashboard</span>
-                  <span>Dashboard &amp; Antrean</span>
-                </div>
-              </Link>
-
-              <Link
-                href="/admin/orders"
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a] transition-colors text-[13px]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-[18px]">verified</span>
-                  <span>Verifikasi Pembayaran</span>
-                </div>
-                <span className="inline-flex items-center justify-center px-1.5 py-0.5 rounded-full bg-[#755a24] text-white text-[10px] font-bold leading-none">
-                  4
-                </span>
-              </Link>
-
-              <Link
-                href="/admin/builder"
-                className="flex items-center justify-between px-3 py-2 transition-colors bg-[#20463a] text-white font-semibold rounded-lg text-[13px]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-[18px]">edit_document</span>
-                  <span>Invitation Editor</span>
-                </div>
-              </Link>
-
-              <Link
-                href="/katalog"
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a] transition-colors text-[13px]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-[18px]">style</span>
-                  <span>Katalog Tema</span>
-                </div>
-              </Link>
-
-              <Link
-                href="#rekening"
-                className="flex items-center justify-between px-3 py-2 rounded-lg text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a] transition-colors text-[13px]"
-              >
-                <div className="flex items-center gap-2.5">
-                  <span className="material-symbols-outlined text-[18px]">account_balance</span>
-                  <span>Pengaturan Rekening</span>
-                </div>
-              </Link>
-            </nav>
-          </div>
-        </div>
-
-        {/* User Card */}
-        <div className="p-4">
-          <div className="bg-white p-3 rounded-xl shadow-sm flex items-center justify-between gap-2 border border-[#c1c8c3]/30">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-8 h-8 rounded-full bg-[#063025] flex-shrink-0 flex items-center justify-center">
-                <span className="material-symbols-outlined text-white text-[18px]">person</span>
-              </div>
-              <div className="flex flex-col truncate">
-                <span className="text-[13px] font-semibold text-[#1c1c1a] truncate leading-tight">Bagas Pratama</span>
-                <span className="text-[11px] text-[#755a24] truncate">Lead Concierge</span>
-              </div>
-            </div>
+      {/* Top Main Navigation Header */}
+      <header className="fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-xl shadow-[0_1px_12px_rgba(6,48,37,0.06)] z-50">
+        <div className="h-16 w-full px-4 sm:px-6 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
             <Link
-              href="/login"
-              className="text-[#414845] hover:text-[#ba1a1a] transition-colors p-1 rounded-lg flex items-center justify-center"
-              title="Logout"
+              href="/admin/orders"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#f0edea] hover:bg-[#ebe8e4] transition-colors text-[#414845] hover:text-[#1c1c1a]"
+              title="Kembali ke Dashboard"
             >
-              <span className="material-symbols-outlined text-[20px]">logout</span>
+              <span className="material-symbols-outlined text-[20px]">arrow_back</span>
             </Link>
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <h1 className="font-headline text-base sm:text-lg text-[#063025] tracking-tight font-semibold">
+                    Editor Undangan: {groomNickname} &amp; {brideNickname}
+                  </h1>
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#ffdb99] text-[#795f28]">
+                    Draft
+                  </span>
+                </div>
+                <span className="text-[12px] text-[#414845]">Pernikahan Tradisional Modern Adat Jawa</span>
+              </div>
+            </div>
           </div>
-        </div>
-      </aside>
 
-      {/* Main Container */}
-      <div className="md:pl-60">
-        {/* Top Header Bar */}
-        <header className="fixed top-0 left-0 md:left-60 right-0 h-16 bg-[#fcf9f5]/80 backdrop-blur-xl shadow-sm z-40 px-6 sm:px-10 flex items-center justify-between border-b border-[#063025]/5">
-          <div className="flex items-center gap-2 text-[#414845] text-[13px] min-w-0">
-            <Link href="/admin/orders" className="hover:text-[#063025] transition-colors cursor-pointer whitespace-nowrap">
-              Admin Portal
-            </Link>
-            <span className="text-[#c1c8c3]">/</span>
-            <span className="hover:text-[#063025] transition-colors cursor-pointer whitespace-nowrap">Editor Undangan</span>
-            <span className="text-[#c1c8c3]">/</span>
-            <span className="text-[#063025] font-semibold truncate">
-              #NK-8820 ({groomNick} &amp; {brideNick})
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f6f3ef]">
+            <span className="material-symbols-outlined text-[#063025] text-[18px]">link</span>
+            <span className="text-[13px] text-[#1c1c1a]">nikahkuy.id/</span>
+            <span className="text-[13px] font-semibold text-[#063025]">{currentSlug}</span>
+            <span className="inline-flex items-center gap-1 pl-2 text-[11px] text-[#063025] font-bold">
+              <span className="material-symbols-outlined text-[#063025] text-[16px]">check_circle</span>
+              Tersedia
             </span>
           </div>
 
-          <div className="flex items-center gap-4 shrink-0">
-            <div className="relative flex items-center">
-              <span className="material-symbols-outlined absolute left-3 text-[#414845] text-[18px]">search</span>
-              <input
-                className="bg-white text-[#1c1c1a] pl-9 pr-4 py-2 rounded-lg text-[13px] placeholder:text-[#717975] focus:outline-none shadow-xs w-48 sm:w-64 transition-all border border-[#ebe8e4]"
-                placeholder="Cari pesanan, klien..."
-                type="search"
-              />
-            </div>
-            <div className="flex items-center gap-1">
-              <button
-                className="relative p-2 text-[#414845] hover:text-[#1c1c1a] hover:bg-[#f0edea] transition-colors rounded-lg"
-                title="Notifikasi"
-                type="button"
-              >
-                <span className="material-symbols-outlined text-[20px]">notifications</span>
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#755a24]"></span>
-              </button>
-            </div>
-            <div className="h-6 w-px bg-[#c1c8c3]/60"></div>
-            <div className="flex items-center gap-2 pl-1 cursor-pointer">
-              <div className="w-8 h-8 rounded-full bg-[#063025] flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-white text-[18px]">person</span>
-              </div>
-              <span className="text-[13px] text-[#1c1c1a] font-semibold hidden md:inline">Bagas P.</span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => alert('Draft berhasil disimpan!')}
+              className="inline-flex items-center justify-center px-3.5 py-2 rounded-lg bg-[#f0edea] hover:bg-[#ebe8e4] text-[#1c1c1a] font-semibold text-[13px] transition-all gap-1.5"
+              type="button"
+            >
+              <span className="material-symbols-outlined text-[18px]">save</span>
+              <span className="hidden sm:inline">Simpan Draft</span>
+            </button>
+
+            <button
+              onClick={handlePublish}
+              disabled={isPublishing}
+              className={`inline-flex items-center justify-center px-4 py-2 rounded-lg text-white font-semibold text-[13px] transition-all shadow-md gap-1.5 ${
+                isPublished ? 'bg-emerald-700' : 'bg-[#063025] hover:bg-[#20463a]'
+              }`}
+              type="button"
+            >
+              {isPublishing ? (
+                <>
+                  <span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span>
+                  <span>Menerbitkan...</span>
+                </>
+              ) : isPublished ? (
+                <>
+                  <span className="material-symbols-outlined text-[18px] text-[#c2ecdb]">done_all</span>
+                  <span>Telah Diterbitkan!</span>
+                </>
+              ) : (
+                <>
+                  <span className="material-symbols-outlined text-[18px] text-[#ffdea4]">send</span>
+                  <span>Publish &amp; Kirim ke Klien</span>
+                </>
+              )}
+            </button>
+
+            <div className="w-8 h-8 rounded-full bg-[#063025] flex items-center justify-center ml-1">
+              <span className="material-symbols-outlined text-white text-[18px]">person</span>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
 
-        {/* Main Workspace Body */}
-        <main className="w-full pt-20 px-4 sm:px-10 pb-12 bg-[#fcf9f5] min-h-screen">
-          <div className="flex flex-col w-full">
-            {/* Top Command & Action Bar */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6">
-              <div className="flex flex-col gap-1 min-w-0 max-w-3xl">
-                <div className="flex items-center gap-1.5 text-[#414845] text-[11px] uppercase tracking-wider font-semibold">
-                  <span>Admin Console</span>
-                  <span className="text-[#755a24]">/</span>
-                  <span>Manajemen Pesanan</span>
-                  <span className="text-[#755a24]">/</span>
-                  <span className="text-[#063025] font-bold">Editor Undangan #NK-8820</span>
+      {/* Slim Icon Sidebar Navigation */}
+      <aside className="fixed left-0 top-16 bottom-0 w-20 bg-white shadow-[1px_0_12px_rgba(6,48,37,0.04)] z-40 flex flex-col items-center py-4 justify-between hidden md:flex border-r border-[#063025]/5">
+        <nav className="w-full flex flex-col items-center gap-2 px-2">
+          <button
+            onClick={() => setActiveNav('content')}
+            className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 ${
+              activeNav === 'content'
+                ? 'bg-[#20463a] text-white shadow-sm'
+                : 'text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a]'
+            }`}
+            title="Konten & Mempelai"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">edit_note</span>
+            <span className="text-[10px] font-bold">Konten</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('event')}
+            className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 ${
+              activeNav === 'event'
+                ? 'bg-[#20463a] text-white shadow-sm'
+                : 'text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a]'
+            }`}
+            title="Acara & Lokasi"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">event</span>
+            <span className="text-[10px] font-bold">Acara</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('gallery')}
+            className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 ${
+              activeNav === 'gallery'
+                ? 'bg-[#20463a] text-white shadow-sm'
+                : 'text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a]'
+            }`}
+            title="Galeri & Musik"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">photo_library</span>
+            <span className="text-[10px] font-bold">Galeri</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('gift')}
+            className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 ${
+              activeNav === 'gift'
+                ? 'bg-[#20463a] text-white shadow-sm'
+                : 'text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a]'
+            }`}
+            title="Amplop & RSVP"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">featured_seasonal_and_gifts</span>
+            <span className="text-[10px] font-bold">Amplop</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('theme')}
+            className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all gap-1 ${
+              activeNav === 'theme'
+                ? 'bg-[#20463a] text-white shadow-sm'
+                : 'text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a]'
+            }`}
+            title="Desain & Font"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">palette</span>
+            <span className="text-[10px] font-bold">Tema</span>
+          </button>
+        </nav>
+
+        <div className="flex flex-col items-center gap-2 w-full px-2">
+          <button
+            onClick={() => setActiveNav('settings')}
+            className="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-[#414845] hover:bg-[#ebe8e4] hover:text-[#1c1c1a] transition-all gap-1"
+            title="Pengaturan"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">tune</span>
+            <span className="text-[10px] font-bold">Opsi</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Workspace Body */}
+      <div className="md:pl-20">
+        <main className="w-full pt-16 bg-[#fcf9f5] min-h-screen">
+          <div className="w-full grid grid-cols-12 min-h-[calc(100vh-4rem)]">
+            {/* LEFT PANE: Configuration Form & Stepper (7 of 12 cols ~ 58%) */}
+            <div className="col-span-12 xl:col-span-7 flex flex-col p-6 lg:p-8 xl:pr-10 bg-[#fcf9f5]">
+              {/* Stepper Navigation */}
+              <nav className="w-full pb-4">
+                <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+                  {/* Step 1: Completed */}
+                  <button
+                    onClick={() => setCurrentStep(1)}
+                    className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#f0edea] hover:bg-[#ebe8e4] transition-all shrink-0 text-left"
+                    type="button"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-[#063025] flex items-center justify-center text-white text-[11px]">
+                      <span className="material-symbols-outlined text-[13px]">check</span>
+                    </span>
+                    <span className="text-[13px] font-semibold text-[#1c1c1a]">1. Tema &amp; URL</span>
+                  </button>
+
+                  <div className="w-4 h-0.5 bg-[#e5e2de] shrink-0"></div>
+
+                  {/* Step 2: Active */}
+                  <button
+                    onClick={() => setCurrentStep(2)}
+                    className={`group flex items-center gap-2 px-4 py-2 rounded-full shrink-0 text-left shadow-xs transition-all ${
+                      currentStep === 2 ? 'bg-[#20463a] text-white' : 'bg-[#f0edea] text-[#1c1c1a]'
+                    }`}
+                    type="button"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-[#ffdea4] text-[#261900] flex items-center justify-center text-[11px] font-bold">
+                      2
+                    </span>
+                    <span className="font-headline text-[14px] font-semibold tracking-tight">Data Mempelai</span>
+                    <span className="w-2 h-2 rounded-full bg-[#ffdea4] animate-pulse ml-0.5"></span>
+                  </button>
+
+                  <div className="w-4 h-0.5 bg-[#e5e2de] shrink-0"></div>
+
+                  {/* Step 3 */}
+                  <button
+                    onClick={() => setCurrentStep(3)}
+                    className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#f6f3ef] hover:bg-[#f0edea] text-[#414845] transition-all shrink-0 text-left"
+                    type="button"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-[#e5e2de] text-[#414845] flex items-center justify-center text-[11px] font-bold">
+                      3
+                    </span>
+                    <span className="text-[13px] font-semibold">Jadwal &amp; Lokasi</span>
+                  </button>
+
+                  <div className="w-4 h-0.5 bg-[#e5e2de] shrink-0"></div>
+
+                  {/* Step 4 */}
+                  <button
+                    onClick={() => setCurrentStep(4)}
+                    className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#f6f3ef] hover:bg-[#f0edea] text-[#414845] transition-all shrink-0 text-left"
+                    type="button"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-[#e5e2de] text-[#414845] flex items-center justify-center text-[11px] font-bold">
+                      4
+                    </span>
+                    <span className="text-[13px] font-semibold">Galeri &amp; Musik</span>
+                  </button>
+
+                  <div className="w-4 h-0.5 bg-[#e5e2de] shrink-0"></div>
+
+                  {/* Step 5 */}
+                  <button
+                    onClick={() => setCurrentStep(5)}
+                    className="group flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#f6f3ef] hover:bg-[#f0edea] text-[#414845] transition-all shrink-0 text-left"
+                    type="button"
+                  >
+                    <span className="w-5 h-5 rounded-full bg-[#e5e2de] text-[#414845] flex items-center justify-center text-[11px] font-bold">
+                      5
+                    </span>
+                    <span className="text-[13px] font-semibold">Amplop &amp; RSVP</span>
+                  </button>
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="font-headline text-3xl sm:text-4xl text-[#063025] tracking-tight leading-tight font-semibold">
-                    Editor Undangan Digital
-                  </h1>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c2ecdb] text-[#063025] text-[11px] font-bold shadow-xs shrink-0">
-                    <span className="w-2 h-2 rounded-full bg-[#406659]"></span>Draft v1.2
+              </nav>
+
+              {/* Section Header */}
+              <div className="flex items-start justify-between mt-4 mb-6">
+                <div>
+                  <span className="text-[11px] text-[#755a24] uppercase tracking-wider block mb-1 font-bold">
+                    Tahap 02 — Profil Utama
                   </span>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-[#ffdb99] text-[#795f28] text-[11px] font-semibold">
-                    Tema: Jawa Ningrat VIP
-                  </span>
+                  <h2 className="font-headline text-2xl lg:text-3xl text-[#063025] tracking-tight font-semibold">
+                    Informasi Kedua Mempelai
+                  </h2>
+                  <p className="text-[14px] text-[#414845] mt-0.5">
+                    Tuliskan identitas nama lengkap, silsilah keluarga, serta potret yang ditampilkan pada undangan digital.
+                  </p>
                 </div>
-                <p className="text-[14px] text-[#414845] leading-normal mt-0.5">
-                  Kustomisasi data calon mempelai, jadwal prosesi sakral, kurasi multimedia, dan konfigurasi slug domain resmi klien.
-                </p>
+                <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#f0edea] text-[#414845] text-[11px] font-bold shrink-0">
+                  <span className="material-symbols-outlined text-[16px] text-[#063025]">auto_awesome</span>
+                  <span>Pratinjau Otomatis</span>
+                </div>
               </div>
 
-              <div className="flex items-center gap-3 shrink-0 self-start lg:self-center">
-                <button
-                  onClick={handleSaveDraft}
-                  disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#f0edea] text-[#1c1c1a] font-semibold text-[14px] hover:bg-[#ebe8e4] transition-colors shadow-xs border border-[#c1c8c3]/40"
-                  type="button"
-                >
-                  <span className="material-symbols-outlined text-[18px] text-[#414845]">save</span>
-                  <span>{isSaving ? 'Menyimpan...' : 'Simpan Draft'}</span>
-                </button>
+              {/* Main Form Stack */}
+              <div className="space-y-6">
+                {/* SUB-CARD 1: Mempelai Pria (The Groom) */}
+                <section className="rounded-2xl bg-white p-6 shadow-sm border border-[#063025]/5">
+                  <div className="flex items-center justify-between pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#c2ecdb] flex items-center justify-center text-[#002118]">
+                        <span className="material-symbols-outlined text-[18px]">man</span>
+                      </div>
+                      <div>
+                        <h3 className="font-headline text-lg text-[#063025] font-semibold">Mempelai Pria</h3>
+                        <p className="text-[12px] text-[#414845]">Calon pengantin kakung beserta garis keluarga</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#a6cfbf]/40 text-[#284e41] text-[11px] font-bold">
+                      Wajib Diisi
+                    </span>
+                  </div>
 
-                <button
-                  onClick={handlePublish}
-                  disabled={isPublishing}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-white font-semibold text-[14px] shadow-md transition-all ${
-                    isPublished ? 'bg-[#406659]' : 'bg-[#063025] hover:bg-[#20463a]'
-                  }`}
-                  type="button"
-                >
-                  {isPublishing ? (
-                    <>
-                      <span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span>
-                      <span>Memproses...</span>
-                    </>
-                  ) : isPublished ? (
-                    <>
-                      <span className="material-symbols-outlined text-[18px] text-[#c2ecdb]">check_circle</span>
-                      <span>Berhasil Diterbitkan!</span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="material-symbols-outlined text-[18px] text-[#ffdea4]">rocket_launch</span>
-                      <span>Publish &amp; Kirim Tautan</span>
-                    </>
-                  )}
-                </button>
+                  {/* Photo Upload Dropzone & Thumbnail */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2 pb-5">
+                    <div className="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-[#f6f3ef]">
+                      <div className="w-24 h-28 rounded-lg overflow-hidden relative shadow-sm">
+                        <img className="w-full h-full object-cover" alt="Groom portrait" src={groomPhoto} />
+                        <div className="absolute bottom-1 right-1 bg-white/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-[#063025] flex items-center gap-0.5">
+                          <span className="material-symbols-outlined text-[10px]">photo_camera</span>
+                          Foto
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#063025] mt-2">rama-portrait.jpg</span>
+                      <span className="text-[11px] text-[#414845]">1.4 MB • Siap</span>
+                    </div>
+
+                    <div className="md:col-span-8 flex flex-col justify-center items-center p-5 rounded-xl bg-white border border-dashed border-[#c1c8c3] text-center">
+                      <div className="w-10 h-10 rounded-full bg-[#f0edea] flex items-center justify-center text-[#063025] mb-2">
+                        <span className="material-symbols-outlined text-[20px]">cloud_upload</span>
+                      </div>
+                      <p className="text-[14px] font-semibold text-[#1c1c1a]">Unggah Foto Mempelai Pria</p>
+                      <p className="text-[12px] text-[#414845] mt-0.5 mb-3">Format JPG atau PNG (Maksimal 5MB, rasio disarankan 3:4)</p>
+                      <div className="flex items-center gap-2">
+                        <label className="cursor-pointer px-4 py-1.5 rounded-lg bg-[#f0edea] hover:bg-[#ebe8e4] text-[#1c1c1a] text-[12px] font-semibold transition-colors flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+                          <span>Ganti File</span>
+                          <input
+                            accept="image/*"
+                            className="hidden"
+                            type="file"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) setGroomPhoto(URL.createObjectURL(file));
+                            }}
+                          />
+                        </label>
+                        <button
+                          onClick={() => setGroomPhoto('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80')}
+                          className="px-3 py-1.5 rounded-lg bg-transparent hover:bg-[#f6f3ef] text-[#414845] text-[12px] font-semibold transition-colors"
+                          type="button"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Form Fields Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="groom-fullname">
+                        Nama Lengkap &amp; Gelar
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="groom-fullname"
+                        value={groomFullname}
+                        onChange={(e) => setGroomFullname(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Akan ditampilkan pada header pembuka &amp; sampul</span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="groom-nickname">
+                        Nama Panggilan
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="groom-nickname"
+                        value={groomNickname}
+                        onChange={(e) => setGroomNickname(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Digunakan pada monogram nama singkat</span>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="groom-parents">
+                        Nama Ayah &amp; Ibu Kandung
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="groom-parents"
+                        value={groomParents}
+                        onChange={(e) => setGroomParents(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Putra pertama dari keluarga besar Bpk. Hendra Wijaya</span>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="groom-instagram">
+                        Akun Media Sosial (Instagram)
+                      </label>
+                      <div className="flex items-center rounded-lg bg-[#f6f3ef] px-3.5 focus-within:bg-white focus-within:ring-1 focus-within:ring-[#063025] transition-all">
+                        <span className="text-[14px] text-[#414845] mr-1">@</span>
+                        <input
+                          className="w-full py-2.5 bg-transparent text-[#1c1c1a] text-[14px] focus:outline-none font-medium"
+                          id="groom-instagram"
+                          value={groomInstagram}
+                          onChange={(e) => setGroomInstagram(e.target.value)}
+                          type="text"
+                        />
+                        <span className="material-symbols-outlined text-[18px] text-[#414845]">open_in_new</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* SUB-CARD 2: Mempelai Wanita (The Bride) */}
+                <section className="rounded-2xl bg-white p-6 shadow-sm border border-[#063025]/5">
+                  <div className="flex items-center justify-between pb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#ffdea4] flex items-center justify-center text-[#261900]">
+                        <span className="material-symbols-outlined text-[18px]">woman</span>
+                      </div>
+                      <div>
+                        <h3 className="font-headline text-lg text-[#063025] font-semibold">Mempelai Wanita</h3>
+                        <p className="text-[12px] text-[#414845]">Calon pengantin putri beserta garis keluarga</p>
+                      </div>
+                    </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#ffdb99] text-[#795f28] text-[11px] font-bold">
+                      Wajib Diisi
+                    </span>
+                  </div>
+
+                  {/* Photo Upload Dropzone & Thumbnail */}
+                  <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-2 pb-5">
+                    <div className="md:col-span-4 flex flex-col items-center justify-center p-3 rounded-xl bg-[#f6f3ef]">
+                      <div className="w-24 h-28 rounded-lg overflow-hidden relative shadow-sm">
+                        <img className="w-full h-full object-cover" alt="Bride portrait" src={bridePhoto} />
+                        <div className="absolute bottom-1 right-1 bg-white/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-[#755a24] flex items-center gap-0.5">
+                          <span className="material-symbols-outlined text-[10px]">photo_camera</span>
+                          Foto
+                        </div>
+                      </div>
+                      <span className="text-[11px] font-bold text-[#063025] mt-2">shinta-portrait.jpg</span>
+                      <span className="text-[11px] text-[#414845]">1.8 MB • Siap</span>
+                    </div>
+
+                    <div className="md:col-span-8 flex flex-col justify-center items-center p-5 rounded-xl bg-white border border-dashed border-[#c1c8c3] text-center">
+                      <div className="w-10 h-10 rounded-full bg-[#f0edea] flex items-center justify-center text-[#063025] mb-2">
+                        <span className="material-symbols-outlined text-[20px]">cloud_upload</span>
+                      </div>
+                      <p className="text-[14px] font-semibold text-[#1c1c1a]">Unggah Foto Mempelai Wanita</p>
+                      <p className="text-[12px] text-[#414845] mt-0.5 mb-3">Format JPG atau PNG (Maksimal 5MB, rasio disarankan 3:4)</p>
+                      <div className="flex items-center gap-2">
+                        <label className="cursor-pointer px-4 py-1.5 rounded-lg bg-[#f0edea] hover:bg-[#ebe8e4] text-[#1c1c1a] text-[12px] font-semibold transition-colors flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[16px]">add_photo_alternate</span>
+                          <span>Ganti File</span>
+                          <input
+                            accept="image/*"
+                            className="hidden"
+                            type="file"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (file) setBridePhoto(URL.createObjectURL(file));
+                            }}
+                          />
+                        </label>
+                        <button
+                          onClick={() => setBridePhoto('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')}
+                          className="px-3 py-1.5 rounded-lg bg-transparent hover:bg-[#f6f3ef] text-[#414845] text-[12px] font-semibold transition-colors"
+                          type="button"
+                        >
+                          Reset
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Form Fields Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="bride-fullname">
+                        Nama Lengkap &amp; Gelar
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="bride-fullname"
+                        value={brideFullname}
+                        onChange={(e) => setBrideFullname(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Akan dicetak pada sampul depan dan pengantar doa</span>
+                    </div>
+
+                    <div>
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="bride-nickname">
+                        Nama Panggilan
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="bride-nickname"
+                        value={brideNickname}
+                        onChange={(e) => setBrideNickname(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Digunakan pada monogram nama singkat</span>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="bride-parents">
+                        Nama Ayah &amp; Ibu Kandung
+                      </label>
+                      <input
+                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#f6f3ef] text-[#1c1c1a] text-[14px] font-medium focus:bg-white focus:ring-1 focus:ring-[#063025] focus:outline-none transition-all"
+                        id="bride-parents"
+                        value={brideParents}
+                        onChange={(e) => setBrideParents(e.target.value)}
+                        type="text"
+                      />
+                      <span className="text-[11px] text-[#414845] mt-1 block">Putri kedua dari keluarga besar Bpk. Bambang Irawan</span>
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label className="block text-[13px] font-semibold text-[#1c1c1a] mb-1.5" htmlFor="bride-instagram">
+                        Akun Media Sosial (Instagram)
+                      </label>
+                      <div className="flex items-center rounded-lg bg-[#f6f3ef] px-3.5 focus-within:bg-white focus-within:ring-1 focus-within:ring-[#063025] transition-all">
+                        <span className="text-[14px] text-[#414845] mr-1">@</span>
+                        <input
+                          className="w-full py-2.5 bg-transparent text-[#1c1c1a] text-[14px] focus:outline-none font-medium"
+                          id="bride-instagram"
+                          value={brideInstagram}
+                          onChange={(e) => setBrideInstagram(e.target.value)}
+                          type="text"
+                        />
+                        <span className="material-symbols-outlined text-[18px] text-[#414845]">open_in_new</span>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* Bottom Navigation Bar */}
+                <div className="flex items-center justify-between pt-4 pb-12">
+                  <button
+                    onClick={() => setCurrentStep(1)}
+                    className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#f0edea] hover:bg-[#ebe8e4] text-[#1c1c1a] font-semibold text-[14px] transition-all gap-2"
+                    type="button"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">arrow_back</span>
+                    <span>Sebelumnya (Tema &amp; URL)</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      alert('Data profil kedua mempelai berhasil disimpan! Lanjut ke Step 3: Jadwal & Lokasi.');
+                      setCurrentStep(3);
+                    }}
+                    className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#063025] hover:bg-[#20463a] text-white font-semibold text-[14px] transition-all shadow-md gap-2"
+                    type="button"
+                  >
+                    <span>Simpan &amp; Lanjut ke Jadwal</span>
+                    <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                  </button>
+                </div>
               </div>
             </div>
 
-            {/* Workspace Grid: 60% Form Atelier vs 40% Live Preview & Handover Panel */}
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
-              {/* LEFT CONFIGURATION COLUMN (7 Cols ~ 58-60%) */}
-              <div className="xl:col-span-7 flex flex-col gap-6">
-                {/* Stage Navigation Tabs */}
-                <nav className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-1.5 bg-[#f0edea] rounded-xl shadow-inner border border-[#ebe8e4]">
+            {/* RIGHT PANE: Sticky Interactive Live Preview Canvas (5 of 12 cols ~ 42%) */}
+            <div className="col-span-12 xl:col-span-5 bg-[#f6f3ef] p-6 lg:p-8 flex flex-col items-center xl:sticky xl:top-16 xl:h-[calc(100vh-4rem)] overflow-y-auto">
+              {/* Preview Controls Header Bar */}
+              <div className="w-full max-w-[400px] flex items-center justify-between mb-4 px-1">
+                {/* Viewport Switcher */}
+                <div className="inline-flex items-center p-1 rounded-full bg-white shadow-xs">
                   <button
-                    onClick={() => setActiveTab('mempelai')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-[14px] font-semibold transition-all ${
-                      activeTab === 'mempelai'
-                        ? 'bg-white text-[#063025] shadow-xs'
-                        : 'text-[#414845] hover:text-[#1c1c1a] hover:bg-[#ebe8e4]/60'
+                    onClick={() => setViewportMode('mobile')}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold transition-all ${
+                      viewportMode === 'mobile' ? 'bg-[#063025] text-white' : 'text-[#414845] hover:text-[#1c1c1a]'
                     }`}
                     type="button"
                   >
-                    <span className="material-symbols-outlined text-[18px] text-[#755a24]">favorite</span>
-                    <span className="truncate">1. Data Mempelai</span>
+                    <span className="material-symbols-outlined text-[16px]">smartphone</span>
+                    <span>Mobile</span>
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('acara')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-[14px] font-semibold transition-all ${
-                      activeTab === 'acara'
-                        ? 'bg-white text-[#063025] shadow-xs'
-                        : 'text-[#414845] hover:text-[#1c1c1a] hover:bg-[#ebe8e4]/60'
+                    onClick={() => setViewportMode('desktop')}
+                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-semibold transition-all ${
+                      viewportMode === 'desktop' ? 'bg-[#063025] text-white' : 'text-[#414845] hover:text-[#1c1c1a]'
                     }`}
                     type="button"
                   >
-                    <span className="material-symbols-outlined text-[18px]">calendar_month</span>
-                    <span className="truncate">2. Rangkaian Acara</span>
+                    <span className="material-symbols-outlined text-[16px]">laptop</span>
+                    <span>Desktop</span>
                   </button>
+                </div>
 
+                {/* Utility Icons */}
+                <div className="flex items-center gap-1.5">
                   <button
-                    onClick={() => setActiveTab('galeri')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-[14px] font-semibold transition-all ${
-                      activeTab === 'galeri'
-                        ? 'bg-white text-[#063025] shadow-xs'
-                        : 'text-[#414845] hover:text-[#1c1c1a] hover:bg-[#ebe8e4]/60'
-                    }`}
+                    onClick={() => alert('Pratinjau telah disegarkan!')}
+                    className="w-8 h-8 rounded-full bg-white hover:bg-[#f0edea] text-[#1c1c1a] flex items-center justify-center transition-colors shadow-xs"
+                    title="Muat Ulang Pratinjau"
                     type="button"
                   >
-                    <span className="material-symbols-outlined text-[18px]">photo_library</span>
-                    <span className="truncate">3. Galeri &amp; Musik</span>
+                    <span className="material-symbols-outlined text-[18px]">refresh</span>
                   </button>
-
-                  <button
-                    onClick={() => setActiveTab('slug')}
-                    className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-[14px] font-semibold transition-all ${
-                      activeTab === 'slug'
-                        ? 'bg-white text-[#063025] shadow-xs'
-                        : 'text-[#414845] hover:text-[#1c1c1a] hover:bg-[#ebe8e4]/60'
-                    }`}
-                    type="button"
+                  <Link
+                    href="/"
+                    target="_blank"
+                    className="w-8 h-8 rounded-full bg-white hover:bg-[#f0edea] text-[#1c1c1a] flex items-center justify-center transition-colors shadow-xs"
+                    title="Buka di Tab Baru"
                   >
-                    <span className="material-symbols-outlined text-[18px]">link</span>
-                    <span className="truncate">4. Tautan &amp; Slug</span>
-                  </button>
-                </nav>
-
-                {/* SECTION 1: DOMAIN & SLUG IDENTIFIER */}
-                <section className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm flex flex-col gap-4 border border-[#c1c8c3]/30">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-9 h-9 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                        <span className="material-symbols-outlined text-[20px]">public</span>
-                      </div>
-                      <div className="min-w-0">
-                        <h2 className="font-headline text-lg sm:text-xl text-[#063025] font-semibold leading-tight truncate">
-                          Domain &amp; Tautan Kustom
-                        </h2>
-                        <p className="text-[13px] text-[#414845]">Konfigurasi URL publik yang disematkan dalam undangan QR &amp; WA blast.</p>
-                      </div>
-                    </div>
-                    <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#c2ecdb]/50 text-[#063025] text-[11px] font-bold shrink-0">
-                      <span className="material-symbols-outlined text-[16px] text-[#406659]">verified</span>
-                      Tersedia &amp; Siap Pakai
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <div className="flex items-center justify-between">
-                      <label className="text-[13px] text-[#1c1c1a] font-semibold">Custom Slug Undangan</label>
-                      <span className="text-[11px] text-[#717975]">Dapat diubah kapan saja sebelum final</span>
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center bg-[#f6f3ef] rounded-lg p-1.5 border border-[#c1c8c3]/30 focus-within:bg-white focus-within:border-[#063025]/40 transition-all gap-1.5">
-                      <span className="text-[14px] text-[#755a24] font-semibold pl-3 select-none py-1 sm:py-0">
-                        nikahkuy.com/
-                      </span>
-                      <input
-                        className="flex-1 bg-transparent py-1.5 px-2 text-[#1c1c1a] font-semibold text-[14px] focus:outline-none min-w-0"
-                        value={slug}
-                        onChange={handleSlugChange}
-                        type="text"
-                      />
-                      <button
-                        onClick={handleCopyLink}
-                        className="px-3.5 py-1.5 rounded-lg bg-white text-[#414845] hover:text-[#063025] hover:bg-[#f0edea] text-[12px] font-semibold flex items-center justify-center gap-1.5 transition-colors border border-[#c1c8c3]/40 shrink-0 shadow-xs"
-                        type="button"
-                      >
-                        <span className="material-symbols-outlined text-[16px]">
-                          {copiedLink ? 'check' : 'content_copy'}
-                        </span>
-                        <span>{copiedLink ? 'Tersalin' : 'Salin Slug'}</span>
-                      </button>
-                    </div>
-                    <p className="text-[12px] text-[#717975]">
-                      Tautan ini bersifat unik dan akan digunakan sebagai akses portal tamu undangan.
-                    </p>
-                  </div>
-                </section>
-
-                {/* SECTION 2: DATA MEMPELAI LENGKAP */}
-                <section className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm flex flex-col gap-4 border border-[#c1c8c3]/30">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                        <span className="material-symbols-outlined text-[20px]">group</span>
-                      </div>
-                      <div>
-                        <h2 className="font-headline text-lg sm:text-xl text-[#063025] font-semibold leading-tight">
-                          Data Calon Mempelai
-                        </h2>
-                        <p className="text-[13px] text-[#414845]">Informasi silsilah keluarga dan akun media sosial kedua mempelai.</p>
-                      </div>
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full bg-[#ffdea4]/40 text-[#5b430e] text-[11px] uppercase tracking-wider font-bold">
-                      Step 1 of 4
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-                    {/* Mempelai Wanita Card */}
-                    <div className="p-4 rounded-xl bg-[#f6f3ef] flex flex-col justify-between gap-4 border border-[#c1c8c3]/30 h-full">
-                      <div className="flex flex-col gap-3">
-                        <div className="flex items-center justify-between pb-2 border-b border-[#c1c8c3]/30">
-                          <div className="flex items-center gap-2">
-                            <div className="w-7 h-7 rounded-full bg-[#ffdb99] flex items-center justify-center text-[#755a24]">
-                              <span className="material-symbols-outlined text-[16px]">female</span>
-                            </div>
-                            <h3 className="font-headline text-base text-[#063025] font-semibold">Mempelai Wanita</h3>
-                          </div>
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#f0edea] text-[11px] text-[#414845] font-medium">
-                            The Bride
-                          </span>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Nama Lengkap &amp; Gelar
-                          </label>
-                          <input
-                            className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                            value={brideName}
-                            onChange={(e) => setBrideName(e.target.value)}
-                            type="text"
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">Panggilan</label>
-                            <input
-                              className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={brideNick}
-                              onChange={(e) => setBrideNick(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">Instagram</label>
-                            <div className="relative flex items-center">
-                              <span className="absolute left-3 text-[#717975] text-[13px] font-semibold select-none">@</span>
-                              <input
-                                className="w-full bg-white pl-7 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                                value={brideIg}
-                                onChange={(e) => setBrideIg(e.target.value)}
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1 pt-1">
-                        <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                          Keterangan Orang Tua
-                        </label>
-                        <textarea
-                          className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] resize-none transition-colors"
-                          rows={2}
-                          value={brideParents}
-                          onChange={(e) => setBrideParents(e.target.value)}
-                        />
-                      </div>
-                    </div>
-
-                    {/* Mempelai Pria Card */}
-                    <div className="p-4 rounded-xl bg-[#f6f3ef] flex flex-col justify-between gap-4 border border-[#c1c8c3]/30 h-full">
-                      <div className="flex flex-col gap-3">
-                        <div className="flex items-center justify-between pb-2 border-b border-[#c1c8c3]/30">
-                          <div className="flex items-center gap-2">
-                            <div className="w-7 h-7 rounded-full bg-[#20463a]/20 flex items-center justify-center text-[#063025]">
-                              <span className="material-symbols-outlined text-[16px]">male</span>
-                            </div>
-                            <h3 className="font-headline text-base text-[#063025] font-semibold">Mempelai Pria</h3>
-                          </div>
-                          <span className="px-2.5 py-0.5 rounded-full bg-[#f0edea] text-[11px] text-[#414845] font-medium">
-                            The Groom
-                          </span>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Nama Lengkap &amp; Gelar
-                          </label>
-                          <input
-                            className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                            value={groomName}
-                            onChange={(e) => setGroomName(e.target.value)}
-                            type="text"
-                          />
-                        </div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">Panggilan</label>
-                            <input
-                              className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={groomNick}
-                              onChange={(e) => setGroomNick(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                          <div className="flex flex-col gap-1">
-                            <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">Instagram</label>
-                            <div className="relative flex items-center">
-                              <span className="absolute left-3 text-[#717975] text-[13px] font-semibold select-none">@</span>
-                              <input
-                                className="w-full bg-white pl-7 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[14px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                                value={groomIg}
-                                onChange={(e) => setGroomIg(e.target.value)}
-                                type="text"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col gap-1 pt-1">
-                        <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                          Keterangan Orang Tua
-                        </label>
-                        <textarea
-                          className="w-full bg-white px-3 py-2 rounded-lg text-[#1c1c1a] text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] resize-none transition-colors"
-                          rows={2}
-                          value={groomParents}
-                          onChange={(e) => setGroomParents(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION 3: RANGKAIAN ACARA UTAMA */}
-                <section className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm flex flex-col gap-4 border border-[#c1c8c3]/30">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                        <span className="material-symbols-outlined text-[20px]">event_available</span>
-                      </div>
-                      <div>
-                        <h2 className="font-headline text-lg sm:text-xl text-[#063025] font-semibold leading-tight">
-                          Rangkaian Acara Utama
-                        </h2>
-                        <p className="text-[13px] text-[#414845]">Detail penjadwalan akad nikah serta resepsi perayaan.</p>
-                      </div>
-                    </div>
-                    <button
-                      onClick={() => alert('Membuka dialog tambah sesi prosesi baru (Siraman / Ngunduh Mantu)')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#f0edea] text-[#063025] text-[12px] font-semibold hover:bg-[#ebe8e4] transition-colors border border-[#c1c8c3]/40 shadow-xs"
-                      type="button"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">add_circle</span>
-                      <span>Tambah Sesi</span>
-                    </button>
-                  </div>
-
-                  <div className="flex flex-col gap-4">
-                    {/* Event 1: Akad Nikah */}
-                    <div className="p-4 rounded-xl bg-[#f6f3ef] flex flex-col gap-3 border border-[#c1c8c3]/30">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#755a24]"></span>
-                          <h3 className="font-headline text-base text-[#063025] font-semibold">1. Akad Nikah / Pemberkatan</h3>
-                        </div>
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#ffdb99] text-[#795f28] text-[11px] font-bold">
-                          Sesi Sakral
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Hari &amp; Tanggal
-                          </label>
-                          <div className="relative flex items-center">
-                            <span className="material-symbols-outlined absolute left-3 text-[#755a24] text-[18px]">
-                              calendar_today
-                            </span>
-                            <input
-                              className="w-full bg-white pl-10 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={akadDate}
-                              onChange={(e) => setAkadDate(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Waktu Pelaksanaan
-                          </label>
-                          <div className="relative flex items-center">
-                            <span className="material-symbols-outlined absolute left-3 text-[#755a24] text-[18px]">
-                              schedule
-                            </span>
-                            <input
-                              className="w-full bg-white pl-10 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={akadTime}
-                              onChange={(e) => setAkadTime(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                          Tempat &amp; Alamat
-                        </label>
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                          <input
-                            className="flex-1 bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors min-w-0"
-                            value={akadVenue}
-                            onChange={(e) => setAkadVenue(e.target.value)}
-                            type="text"
-                          />
-                          <button
-                            onClick={() => alert('Membuka Google Maps Venue Selector')}
-                            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-white text-[#063025] hover:bg-[#f0edea] border border-[#c1c8c3]/40 transition-colors text-[12px] font-semibold shrink-0 shadow-xs"
-                            type="button"
-                          >
-                            <span className="material-symbols-outlined text-[18px] text-[#406659]">pin_drop</span>
-                            <span>Sematkan Maps</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Event 2: Resepsi Pernikahan */}
-                    <div className="p-4 rounded-xl bg-[#f6f3ef] flex flex-col gap-3 border border-[#c1c8c3]/30">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#063025]"></span>
-                          <h3 className="font-headline text-base text-[#063025] font-semibold">2. Resepsi Pernikahan</h3>
-                        </div>
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#c2ecdb] text-[#063025] text-[11px] font-bold">
-                          Perayaan Agung
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Hari &amp; Tanggal
-                          </label>
-                          <div className="relative flex items-center">
-                            <span className="material-symbols-outlined absolute left-3 text-[#755a24] text-[18px]">
-                              calendar_today
-                            </span>
-                            <input
-                              className="w-full bg-white pl-10 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={resepsiDate}
-                              onChange={(e) => setResepsiDate(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex flex-col gap-1">
-                          <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                            Waktu Pelaksanaan
-                          </label>
-                          <div className="relative flex items-center">
-                            <span className="material-symbols-outlined absolute left-3 text-[#755a24] text-[18px]">
-                              schedule
-                            </span>
-                            <input
-                              className="w-full bg-white pl-10 pr-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors"
-                              value={resepsiTime}
-                              onChange={(e) => setResepsiTime(e.target.value)}
-                              type="text"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col gap-1">
-                        <label className="text-[11px] text-[#414845] uppercase tracking-wide font-bold">
-                          Tempat &amp; Alamat
-                        </label>
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                          <input
-                            className="flex-1 bg-white px-3 py-2 rounded-lg text-[#1c1c1a] font-semibold text-[13px] border border-[#c1c8c3]/40 focus:outline-none focus:border-[#063025] transition-colors min-w-0"
-                            value={resepsiVenue}
-                            onChange={(e) => setResepsiVenue(e.target.value)}
-                            type="text"
-                          />
-                          <button
-                            onClick={() => alert('Membuka Google Maps Venue Selector')}
-                            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-white text-[#063025] hover:bg-[#f0edea] border border-[#c1c8c3]/40 transition-colors text-[12px] font-semibold shrink-0 shadow-xs"
-                            type="button"
-                          >
-                            <span className="material-symbols-outlined text-[18px] text-[#406659]">pin_drop</span>
-                            <span>Sematkan Maps</span>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* SECTION 4: FITUR & MODUL AKTIF */}
-                <section className="bg-white p-6 sm:p-7 rounded-2xl shadow-sm flex flex-col gap-4 border border-[#c1c8c3]/30">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                      <span className="material-symbols-outlined text-[20px]">toggle_on</span>
-                    </div>
-                    <div>
-                      <h2 className="font-headline text-lg sm:text-xl text-[#063025] font-semibold leading-tight">
-                        Fitur &amp; Modul Interaktif
-                      </h2>
-                      <p className="text-[13px] text-[#414845]">Aktifkan modul khusus untuk dipasang pada halaman publik undangan.</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
-                    {/* Toggle 1: RSVP */}
-                    <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#f6f3ef] border border-[#c1c8c3]/30">
-                      <div className="flex items-center gap-3 min-w-0 pr-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                          <span className="material-symbols-outlined text-[20px]">mark_email_read</span>
-                        </div>
-                        <div className="min-w-0">
-                          <span className="text-[13px] text-[#1c1c1a] font-semibold block leading-tight truncate">
-                            Buku Tamu &amp; RSVP
-                          </span>
-                          <span className="text-[11px] text-[#717975] truncate block">Konfirmasi kehadiran via web</span>
-                        </div>
-                      </div>
-                      <label className="relative inline-flex items-center cursor-pointer shrink-0">
-                        <input
-                          checked={rsvpEnabled}
-                          onChange={(e) => setRsvpEnabled(e.target.checked)}
-                          className="sr-only peer"
-                          type="checkbox"
-                        />
-                        <div className="w-11 h-6 bg-[#ebe8e4] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#063025]"></div>
-                      </label>
-                    </div>
-
-                    {/* Toggle 2: Digital Envelope */}
-                    <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#f6f3ef] border border-[#c1c8c3]/30">
-                      <div className="flex items-center gap-3 min-w-0 pr-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                          <span className="material-symbols-outlined text-[20px]">payments</span>
-                        </div>
-                        <div className="min-w-0">
-                          <span className="text-[13px] text-[#1c1c1a] font-semibold block leading-tight truncate">
-                            Amplop Digital &amp; Hadiah
-                          </span>
-                          <span className="text-[11px] text-[#717975] truncate block">Nomor rekening &amp; QRIS statis</span>
-                        </div>
-                      </div>
-                      <label className="relative inline-flex items-center cursor-pointer shrink-0">
-                        <input
-                          checked={envelopeEnabled}
-                          onChange={(e) => setEnvelopeEnabled(e.target.checked)}
-                          className="sr-only peer"
-                          type="checkbox"
-                        />
-                        <div className="w-11 h-6 bg-[#ebe8e4] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#063025]"></div>
-                      </label>
-                    </div>
-
-                    {/* Toggle 3: Love Story */}
-                    <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#f6f3ef] border border-[#c1c8c3]/30">
-                      <div className="flex items-center gap-3 min-w-0 pr-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                          <span className="material-symbols-outlined text-[20px]">auto_stories</span>
-                        </div>
-                        <div className="min-w-0">
-                          <span className="text-[13px] text-[#1c1c1a] font-semibold block leading-tight truncate">
-                            Kisah Cinta (Love Story)
-                          </span>
-                          <span className="text-[11px] text-[#717975] truncate block">Timeline perjalanan asmara</span>
-                        </div>
-                      </div>
-                      <label className="relative inline-flex items-center cursor-pointer shrink-0">
-                        <input
-                          checked={storyEnabled}
-                          onChange={(e) => setStoryEnabled(e.target.checked)}
-                          className="sr-only peer"
-                          type="checkbox"
-                        />
-                        <div className="w-11 h-6 bg-[#ebe8e4] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#063025]"></div>
-                      </label>
-                    </div>
-
-                    {/* Toggle 4: Countdown */}
-                    <div className="flex items-center justify-between p-3.5 rounded-lg bg-[#f6f3ef] border border-[#c1c8c3]/30">
-                      <div className="flex items-center gap-3 min-w-0 pr-2">
-                        <div className="w-8 h-8 rounded-lg bg-[#f0edea] flex items-center justify-center text-[#755a24] shrink-0">
-                          <span className="material-symbols-outlined text-[20px]">hourglass_top</span>
-                        </div>
-                        <div className="min-w-0">
-                          <span className="text-[13px] text-[#1c1c1a] font-semibold block leading-tight truncate">
-                            Countdown Mundur
-                          </span>
-                          <span className="text-[11px] text-[#717975] truncate block">Penghitung mundur hari-H</span>
-                        </div>
-                      </div>
-                      <label className="relative inline-flex items-center cursor-pointer shrink-0">
-                        <input
-                          checked={countdownEnabled}
-                          onChange={(e) => setCountdownEnabled(e.target.checked)}
-                          className="sr-only peer"
-                          type="checkbox"
-                        />
-                        <div className="w-11 h-6 bg-[#ebe8e4] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#063025]"></div>
-                      </label>
-                    </div>
-                  </div>
-                </section>
+                    <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+                  </Link>
+                </div>
               </div>
 
-              {/* RIGHT PREVIEW & HANDOVER COLUMN (5 Cols ~ 40-42%) */}
-              <div className="xl:col-span-5 flex flex-col gap-6 sticky top-20">
-                {/* Device Header / Live Mobile Preview Bar */}
-                <div className="flex items-center justify-between px-4 py-3 bg-white rounded-xl shadow-sm border border-[#c1c8c3]/30">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#406659]"></span>
-                    <span className="text-[13px] text-[#063025] font-semibold">
-                      Live Preview: <span className="text-[#755a24]">Jawa Ningrat VIP</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="px-2 py-0.5 rounded-lg bg-[#f0edea] text-[#414845] text-[11px]">390 x 844 px</span>
-                    <Link
-                      href="/"
-                      target="_blank"
-                      className="p-1 rounded-lg text-[#414845] hover:text-[#063025] hover:bg-[#f0edea] transition-colors"
-                      title="Buka Tab Baru"
-                    >
-                      <span className="material-symbols-outlined text-[18px]">open_in_new</span>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Realistic Smartphone Mockup */}
-                <div className="flex justify-center w-full">
-                  <div className="w-[360px] sm:w-[380px] bg-[#063025] rounded-[44px] p-3 shadow-2xl relative">
-                    {/* Dynamic Island Slot */}
-                    <div className="absolute top-5 left-1/2 -translate-x-1/2 w-28 h-4 bg-[#20463a]/80 rounded-full z-30 flex items-center justify-center">
-                      <div className="w-3 h-3 rounded-full bg-[#063025] mr-3"></div>
-                      <div className="w-8 h-1.5 rounded-full bg-[#063025]/60"></div>
+              {/* Smartphone Realistic Mockup Canvas (iPhone 16 styling) */}
+              <div className="w-[375px] sm:w-[390px] h-[780px] bg-[#31302e] rounded-[48px] p-3 shadow-2xl relative shrink-0">
+                <div className="w-full h-full rounded-[38px] overflow-hidden bg-[#063025] text-white relative flex flex-col">
+                  {/* Dynamic Island & Status Bar */}
+                  <div className="absolute top-0 left-0 right-0 h-10 px-6 flex items-center justify-between z-30 pointer-events-none">
+                    <span className="text-[12px] font-semibold text-white/90">09:41</span>
+                    <div className="w-24 h-5 bg-black rounded-full mx-auto"></div>
+                    <div className="flex items-center gap-1.5 text-white/90">
+                      <span className="material-symbols-outlined text-[14px]">signal_cellular_alt</span>
+                      <span className="material-symbols-outlined text-[14px]">wifi</span>
+                      <span className="material-symbols-outlined text-[14px]">battery_full</span>
                     </div>
+                  </div>
 
-                    {/* Phone Inner Screen Display */}
-                    <div className="w-full bg-[#fdfbf7] rounded-[34px] overflow-hidden relative flex flex-col min-h-[640px] max-h-[660px] select-none">
-                      <div className="relative h-full flex flex-col justify-between p-6 overflow-y-auto">
-                        {/* Background Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-[#1b3d32]/90 via-[#0d261e]/70 to-[#061e17]/95 z-10"></div>
-                        <img
-                          className="absolute inset-0 w-full h-full object-cover object-center z-0"
-                          alt="Bride & Groom"
-                          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-                        />
+                  {/* Scrollable Invitation Body */}
+                  <div className="flex-1 overflow-y-auto scrollbar-none pt-12 pb-8 px-5 flex flex-col items-center text-center relative">
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#063025] via-[#20463a]/80 to-[#063025] pointer-events-none"></div>
+                    <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[#755a24]/15 blur-2xl pointer-events-none"></div>
+                    <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full bg-[#ffdea4]/10 blur-2xl pointer-events-none"></div>
 
-                        {/* Top Monogram & Names */}
-                        <div className="relative z-20 flex flex-col items-center text-center pt-8">
-                          <div className="w-12 h-12 rounded-full border border-[#ffdea4]/40 bg-[#063025]/40 backdrop-blur-md flex items-center justify-center mb-3">
-                            <span className="font-headline text-lg text-[#ffdea4] tracking-widest">
-                              {groomNick.charAt(0)}&amp;{brideNick.charAt(0)}
-                            </span>
-                          </div>
-                          <span className="text-[11px] uppercase tracking-[0.25em] text-[#e5c281] font-bold">
-                            Walimatul Ursy
-                          </span>
-                          <h4 className="font-headline text-2xl sm:text-3xl text-white mt-1 tracking-tight leading-tight">
-                            {groomNick} &amp; {brideNick}
-                          </h4>
-                          <p className="text-[13px] text-white/80 italic mt-1 font-headline">{akadDate}</p>
-                        </div>
-
-                        {/* Couple Vignette Frame */}
-                        <div className="relative z-20 my-4 flex flex-col items-center">
-                          <div className="relative w-44 h-56 rounded-2xl p-1 bg-gradient-to-b from-[#ffdea4]/40 via-[#ffdea4]/10 to-transparent shadow-xl">
-                            <div className="w-full h-full rounded-[14px] overflow-hidden bg-[#20463a]">
-                              <img
-                                className="w-full h-full object-cover"
-                                alt="Romantic couple"
-                                src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80"
-                              />
-                            </div>
-                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#063025]/90 border border-[#ffdea4]/30 backdrop-blur-md text-[#ffdea4] text-[11px] whitespace-nowrap shadow-md">
-                              The Wedding Celebration
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Bottom CTA & Countdown */}
-                        <div className="relative z-20 flex flex-col gap-3 pb-2">
-                          {countdownEnabled && (
-                            <div className="p-2.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/10 flex items-center justify-around text-center">
-                              <div className="flex flex-col">
-                                <span className="font-headline text-lg text-white leading-none">{timeLeft.days}</span>
-                                <span className="text-[9px] text-[#ffdea4] uppercase tracking-wider">Hari</span>
-                              </div>
-                              <span className="text-[#ffdea4]/40">:</span>
-                              <div className="flex flex-col">
-                                <span className="font-headline text-lg text-white leading-none">{timeLeft.hours}</span>
-                                <span className="text-[9px] text-[#ffdea4] uppercase tracking-wider">Jam</span>
-                              </div>
-                              <span className="text-[#ffdea4]/40">:</span>
-                              <div className="flex flex-col">
-                                <span className="font-headline text-lg text-white leading-none">{timeLeft.mins}</span>
-                                <span className="text-[9px] text-[#ffdea4] uppercase tracking-wider">Menit</span>
-                              </div>
-                            </div>
-                          )}
-
-                          <button
-                            className="w-full py-3 rounded-xl bg-[#ffdea4] text-[#261900] font-bold text-[14px] shadow-lg hover:bg-[#e5c281] transition-all flex items-center justify-center gap-2"
-                            type="button"
-                          >
-                            <span className="material-symbols-outlined text-[20px]">mail</span>
-                            <span>Buka Undangan</span>
-                          </button>
-                        </div>
-
-                        {/* Home indicator bar */}
-                        <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/40 rounded-full z-30"></div>
+                    <div className="relative z-10 w-full flex flex-col items-center">
+                      {/* Monogram Seal */}
+                      <div className="mt-4 mb-3 w-14 h-14 rounded-full bg-[#755a24]/20 flex items-center justify-center shadow-inner border border-[#ffdea4]/30">
+                        <span className="font-headline text-lg text-[#ffdea4] tracking-widest italic">{monogram}</span>
                       </div>
-                    </div>
-                  </div>
-                </div>
 
-                {/* Quick Handover Action Box (Bottom Right) */}
-                <section className="bg-white p-6 rounded-2xl shadow-sm flex flex-col gap-3 border border-[#c1c8c3]/30">
-                  <div className="flex items-center justify-between pb-2 border-b border-[#c1c8c3]/30">
-                    <div className="flex items-center gap-2">
-                      <div className="w-7 h-7 rounded-lg bg-[#ffdb99] flex items-center justify-center text-[#755a24]">
-                        <span className="material-symbols-outlined text-[18px]">send</span>
-                      </div>
-                      <h3 className="font-headline text-base text-[#063025] font-semibold">Serah Terima ke Klien</h3>
-                    </div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#ffdb99] text-[#795f28] text-[11px] font-bold">
-                      WhatsApp Ready
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between bg-[#f6f3ef] px-3 py-2.5 rounded-lg border border-[#c1c8c3]/30">
-                    <div className="flex flex-col min-w-0">
-                      <span className="text-[11px] text-[#717975]">Tautan Aktif Publik</span>
-                      <span className="text-[14px] text-[#063025] font-semibold truncate">nikahkuy.com/{slug}</span>
-                    </div>
-                    <button
-                      onClick={handleCopyLink}
-                      className="p-2 rounded-lg bg-white text-[#414845] hover:text-[#063025] transition-colors border border-[#c1c8c3]/30 shadow-xs shrink-0 ml-2"
-                      title="Salin Tautan"
-                      type="button"
-                    >
-                      <span className="material-symbols-outlined text-[18px]">
-                        {copiedLink ? 'check' : 'content_copy'}
+                      {/* Ceremony Header Badge */}
+                      <span className="text-[11px] text-[#e5c281] uppercase tracking-[0.2em] mb-2 font-semibold">
+                        Walimatul Ursy
                       </span>
-                    </button>
+
+                      {/* Couple Title */}
+                      <h1 className="font-headline text-2xl sm:text-3xl text-white tracking-tight leading-tight">
+                        The Wedding of<br />
+                        <span className="text-[#ffdea4] italic">
+                          {groomNickname} &amp; {brideNickname}
+                        </span>
+                      </h1>
+
+                      {/* Date Capsule */}
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md my-4">
+                        <span className="material-symbols-outlined text-[15px] text-[#ffdea4]">calendar_today</span>
+                        <span className="text-[13px] text-white/90 font-medium">{eventDate}</span>
+                      </div>
+
+                      {/* Couple Featured Photo */}
+                      <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden relative my-2 p-1 bg-gradient-to-b from-[#e5c281]/40 via-white/10 to-transparent shadow-xl">
+                        <div className="w-full h-full rounded-[14px] overflow-hidden relative bg-[#20463a]">
+                          <img
+                            className="w-full h-full object-cover"
+                            alt="Indonesian wedding couple"
+                            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#063025]/90 via-transparent to-transparent"></div>
+                          <div className="absolute bottom-3 left-3 right-3 text-left">
+                            <p className="text-[14px] text-white font-semibold leading-snug">
+                              {groomFullname.split(',')[0]} &amp; {brideFullname.split(',')[0]}
+                            </p>
+                            <p className="text-[12px] text-[#ffdea4]">Yogyakarta &amp; Surakarta</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Guest Card */}
+                      <div className="w-full mt-4 p-4 rounded-xl bg-white/10 backdrop-blur-md text-center border border-white/10">
+                        <span className="text-[11px] text-white/70 block uppercase tracking-wider mb-1 font-semibold">
+                          Kepada Yth. Bapak/Ibu/Saudara/i:
+                        </span>
+                        <p className="font-headline text-lg text-[#ffdea4] font-semibold tracking-tight">{guestName}</p>
+                        <p className="text-[11px] text-white/80 mt-0.5">Mohon maaf bila ada kesalahan penulisan nama/gelar</p>
+                      </div>
+
+                      {/* CTA */}
+                      <button
+                        className="w-full mt-4 py-3 px-5 rounded-xl bg-[#ffdea4] text-[#261900] hover:bg-[#e5c281] transition-all font-bold text-[14px] shadow-lg flex items-center justify-center gap-2 group"
+                        type="button"
+                      >
+                        <span className="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">
+                          mail
+                        </span>
+                        <span>Buka Undangan</span>
+                      </button>
+
+                      {/* Segmented Countdown */}
+                      <div className="w-full mt-5 pt-4">
+                        <span className="text-[11px] text-[#e5c281] uppercase tracking-wider block mb-2 font-semibold">
+                          Menuju Hari Bahagia
+                        </span>
+                        <div className="grid grid-cols-3 gap-2">
+                          <div className="p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5">
+                            <span className="font-headline text-xl text-[#ffdea4] block leading-none font-bold">
+                              {countdown.days}
+                            </span>
+                            <span className="text-[11px] text-white/70">Hari</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5">
+                            <span className="font-headline text-xl text-[#ffdea4] block leading-none font-bold">
+                              {countdown.hours}
+                            </span>
+                            <span className="text-[11px] text-white/70">Jam</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/5">
+                            <span className="font-headline text-xl text-[#ffdea4] block leading-none font-bold">
+                              {countdown.mins}
+                            </span>
+                            <span className="text-[11px] text-white/70">Menit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <a
-                    href={`https://wa.me/6282144332211?text=${encodeURIComponent(waMessage)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-2.5 px-4 rounded-lg bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#128C7E] text-[13px] font-semibold transition-colors flex items-center justify-center gap-2 shadow-xs border border-[#25D366]/30"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">chat</span>
-                    <span className="truncate">Kirim Tautan Jadi ke WA Klien (0821-4433-2211)</span>
-                  </a>
-                  <p className="text-[11px] text-[#717975] text-center leading-relaxed">
-                    Pesan otomatis mencakup tautan resmi, barcode QR tamu, dan kredensial akses dasbor RSVP.
-                  </p>
-                </section>
+                  {/* Home Indicator */}
+                  <div className="w-full h-5 flex justify-center items-center pb-2">
+                    <div className="w-32 h-1 bg-white/40 rounded-full"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
